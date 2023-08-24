@@ -1,4 +1,4 @@
-package Lektion1_Git_og_superklasser.Opgave3;
+package Lektion1_Git_og_superklasser.Opgave3og4;
 
 public class Person {
     String navn;

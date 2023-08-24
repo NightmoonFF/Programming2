@@ -1,8 +1,8 @@
 package Lektion1_Git_og_superklasser;
 
-import Lektion1_Git_og_superklasser.Opgave3.Mekaniker;
-import Lektion1_Git_og_superklasser.Opgave3.Synsmand;
-import Lektion1_Git_og_superklasser.Opgave3.Værkfører;
+import Lektion1_Git_og_superklasser.Opgave3og4.Mekaniker;
+import Lektion1_Git_og_superklasser.Opgave3og4.Synsmand;
+import Lektion1_Git_og_superklasser.Opgave3og4.Værkfører;
 
 import java.time.Year;
 import java.util.ArrayList;
@@ -32,10 +32,10 @@ public class lektion1 {
         mekanikere.add(synsmand1);
 
         //Opgave 4.a
-        System.out.println("opgave 4.a - " + mekaniker1.weeklySalary());
+        System.out.println("opgave 4.a  - " + mekaniker1.weeklySalary());
 
         //Opgave 4.b,c,d,e
-        System.out.println("opgave 4.b - " + totalWeeklySalary());
+        System.out.println("opgave 4.b+ - " + totalWeeklySalary());
 
     }
 
