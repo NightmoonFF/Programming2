@@ -17,6 +17,7 @@ public class PolyApp {
         for (Animal animal : animals) {
             animal.makeSound();
         }
+
         System.out.println();
 
         for (Animal animal : animals) {
