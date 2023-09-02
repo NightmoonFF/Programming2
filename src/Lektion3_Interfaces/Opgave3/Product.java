@@ -99,9 +99,9 @@ class ElectricalProduct extends Product{
     }
 }
 
-class Liquor extends Product{
+class LiquorProducts extends Product{
     double alcoholVolume;
-    public Liquor(double price, String name, String description, double alcoholVolume) {
+    public LiquorProducts(double price, String name, String description, double alcoholVolume) {
         super(price, name, description);
         this.alcoholVolume = alcoholVolume;
     }
