@@ -51,7 +51,6 @@ public class Product implements Sellable{
     }
     //endregion
 }
-
 class FoodProduct extends Product{
     double expectedDaysToExpire;
     public FoodProduct(double price, String name, String description, double expectedDaysToExpire) {
@@ -70,7 +69,6 @@ class FoodProduct extends Product{
         this.expectedDaysToExpire = expectedDaysToExpire;
     }
 }
-
 class ElectricalProduct extends Product{
     double averageKilowattHours;
     public ElectricalProduct(double price, String name, String description, double averageKilowattHours) {
@@ -98,7 +96,6 @@ class ElectricalProduct extends Product{
         return 30;
     }
 }
-
 class LiquorProducts extends Product{
     double alcoholVolume;
     public LiquorProducts(double price, String name, String description, double alcoholVolume) {
