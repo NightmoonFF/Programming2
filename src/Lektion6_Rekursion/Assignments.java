@@ -1,11 +1,12 @@
 package Lektion6_Rekursion;
 
 import Utility.ConsoleStyling;
+import Utility.ExerciseProvider;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Assignments {
+public class Assignments implements Printable {
 
 
     //region Exercise 0
@@ -35,7 +36,6 @@ public class Assignments {
         System.out.println();
         return count;
     }
-
     public void printExercise0(){
         ArrayList<Integer> nList = new ArrayList<>();
         Random random = new Random();
@@ -68,7 +68,7 @@ public class Assignments {
         return binominal(n - 1, m) + binominal(n - 1, m - 1);
     }
 
-    public void printBinominal(int limit){
+    public void printExercise1(int limit){
         limit = limit+1;
 
         //region Header
@@ -99,4 +99,9 @@ public class Assignments {
         }
     }
     //endregion
+
+
+
+
+
 }
