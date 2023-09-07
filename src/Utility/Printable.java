@@ -7,11 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface Printable {
-
-
-    default ArrayList<Runnable> getPrintable() {
-        Class<?> clazz = this.getClass();
-        Method[] methods = clazz.getDeclaredMethods();
+    default ArrayList<NamedTask> getPrintable() {
+        Class<?> c = this.getClass();
+        Method[] methods = c.getDeclaredMethods();
 
         // Filter methods with names starting with "print"
         List<Method> printableMethods = Arrays.stream(methods)
@@ -20,28 +18,44 @@ public interface Printable {
 
         // Filter methods declared in the class (not inherited from interfaces)
         List<Method> classMethods = printableMethods.stream()
-                .filter(method -> method.getDeclaringClass() == clazz)
+                .filter(method -> method.getDeclaringClass() == c)
                 .collect(Collectors.toList());
 
-        // Convert printable methods to Runnable and collect them in an ArrayList
-        ArrayList<Runnable> printableList = classMethods.stream()
-                .map(method -> (Runnable) () -> {
+        // Convert methods to NamedTask and collect them in an ArrayList
+        ArrayList<NamedTask> namedTaskList = new ArrayList<>();
+        for (Method method : classMethods) {
+            namedTaskList.add(new NamedTask(method.getName()) {
+                @Override
+                public void run() {
                     try {
-                        method.invoke(this);
+                        method.invoke(c.newInstance()); // Create an instance of the declaring class
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                })
-                .collect(Collectors.toCollection(ArrayList::new));
+                }
+            });
+        }
 
-        // Sort the printableList alphabetically by the method names
-        printableList.sort((runnable1, runnable2) -> {
+        // Sort the namedTaskList alphabetically by the method names
+        namedTaskList.sort((runnable1, runnable2) -> {
             String methodName1 = runnable1.toString();
             String methodName2 = runnable2.toString();
             return methodName1.compareTo(methodName2);
         });
 
-        return printableList;
+        return namedTaskList;
+    }
+}
+
+abstract class NamedTask implements Runnable {
+    private String taskName;
+
+    public NamedTask(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public String getTaskName() {
+        return taskName;
     }
 
 }
