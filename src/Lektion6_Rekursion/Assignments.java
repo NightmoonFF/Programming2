@@ -1,12 +1,11 @@
 package Lektion6_Rekursion;
 
 import Utility.ConsoleStyling;
-import Utility.ExerciseProvider;
-
+import Utility.Dispatchable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Assignments implements Printable {
+public class Assignments implements Dispatchable {
 
 
     //region Exercise 0
@@ -67,9 +66,9 @@ public class Assignments implements Printable {
         //metode(n-1, m) + metode(n-1, m-1) - indtil at 0 er mindre end m, eller n er mindre end n
         return binominal(n - 1, m) + binominal(n - 1, m - 1);
     }
-
-    public void printExercise1(int limit){
-        limit = limit+1;
+    public void printExercise1(){
+        //TODO: allow for parameter inputs, that it asks for after selecting
+        int limit = 10;
 
         //region Header
         System.out.println(ConsoleStyling.color("Table of K("+ limit + "," + limit + ")", ConsoleStyling.Color.YELLOW, true));
@@ -99,6 +98,9 @@ public class Assignments implements Printable {
         }
     }
     //endregion
+
+
+
 
 
 

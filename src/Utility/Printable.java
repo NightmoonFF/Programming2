@@ -8,19 +8,18 @@ import java.util.stream.Collectors;
 
 public interface Printable {
 
-    void printAnyNameYouWant();
 
     default ArrayList<Runnable> getPrintable() {
         Class<?> clazz = this.getClass();
         Method[] methods = clazz.getDeclaredMethods();
 
         // Filter methods with names starting with "print"
-        List<Method> exerciseMethods = Arrays.stream(methods)
+        List<Method> printableMethods = Arrays.stream(methods)
                 .filter(method -> method.getName().startsWith("print"))
                 .collect(Collectors.toList());
 
         // Filter methods declared in the class (not inherited from interfaces)
-        List<Method> classMethods = Arrays.stream(methods)
+        List<Method> classMethods = printableMethods.stream()
                 .filter(method -> method.getDeclaringClass() == clazz)
                 .collect(Collectors.toList());
 
