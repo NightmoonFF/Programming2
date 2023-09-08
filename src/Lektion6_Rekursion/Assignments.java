@@ -99,11 +99,27 @@ public class Assignments implements Dispatchable {
     }
     //endregion
 
+    public boolean isPalindrome(String s){
 
+        if(s.length() <= 1) { return true; }
+        /**
+         * c0=cn-1 and c1...cn-2 is a palindrome
+         * (s is given by s = c0c1...cn-2cn-1)
+         *
+         * n må betyde længden?
+         */
+        if(s.charAt(0) == s.charAt(s.length())){
+            s.substring(0, s.length());
+            isPalindrome(s);
+        }
 
+        return false;
+    }
 
+    public void printExercise2(){
+        System.out.println("");
+        System.out.println();
 
-
-
+    }
 
 }
