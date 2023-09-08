@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
 
-        new Assignments().dispatch();
+        new Assignments().dispatch(1);
 
     }
 }
