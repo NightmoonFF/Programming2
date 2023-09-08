@@ -8,7 +8,6 @@ public class Dispatch {
     static NamedTask[] table;
     static Scanner scanner = new Scanner(System.in);
 
-
     /**
      * Converts the taskList from getPrintable into an array,
      * and starts the terminal process requesting an index of which one
