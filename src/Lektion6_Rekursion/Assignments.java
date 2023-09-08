@@ -2,13 +2,14 @@ package Lektion6_Rekursion;
 
 import Utility.ConsoleStyling;
 import Utility.Dispatchable;
+import Utility.StringLists.StringList;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Assignments implements Dispatchable {
 
-
-    //region Exercise 0
+    //region Exercise 1
     private ArrayList evenNumbersHelper(ArrayList<Integer> numberList, int i){
         i--;
         if(i == 0){
@@ -35,7 +36,7 @@ public class Assignments implements Dispatchable {
         System.out.println();
         return count;
     }
-    public void printExercise0(){
+    public void printExercise1(){
         ArrayList<Integer> nList = new ArrayList<>();
         Random random = new Random();
 
@@ -44,7 +45,7 @@ public class Assignments implements Dispatchable {
             int randomNumber = random.nextInt(100);
             nList.add(randomNumber);
         }
-        System.out.println(ConsoleStyling.color("Opgave 0:", ConsoleStyling.Color.WHITE, true));
+        System.out.println(ConsoleStyling.color("Opgave 1:", ConsoleStyling.Color.WHITE, true));
         System.out.println(
                 ConsoleStyling.color("Total: ", ConsoleStyling.Color.YELLOW, true) +
                 evenNumbers(nList)
@@ -52,7 +53,7 @@ public class Assignments implements Dispatchable {
     }
     //endregion
 
-    // region Exercise 1
+    // region Exercise 2
     public int binominal(int n, int m){
         //Termineringsregel:
         //Kn,0 = 1 eller Kn,n = 1
@@ -66,7 +67,7 @@ public class Assignments implements Dispatchable {
         //metode(n-1, m) + metode(n-1, m-1) - indtil at 0 er mindre end m, eller n er mindre end n
         return binominal(n - 1, m) + binominal(n - 1, m - 1);
     }
-    public void printExercise1(){
+    public void printExercise2(){
         //TODO: allow for parameter inputs, that it asks for after selecting
         int limit = 10;
 
@@ -99,6 +100,12 @@ public class Assignments implements Dispatchable {
     }
     //endregion
 
+    //region Exercise 3
+    /**
+     * case sensitive!
+     * @param s
+     * @return True if word is palindrome
+     */
     public boolean isPalindrome(String s){
 
         if(s.length() <= 1) { return true; }
@@ -108,18 +115,40 @@ public class Assignments implements Dispatchable {
          *
          * n må betyde længden?
          */
-        if(s.charAt(0) == s.charAt(s.length())){
-            s.substring(0, s.length());
-            isPalindrome(s);
+        if(s.charAt(0) == s.charAt(s.length() - 1)){
+            s = s.substring(1, s.length() - 1);
+            return isPalindrome(s);
         }
 
         return false;
     }
 
-    public void printExercise2(){
-        System.out.println("");
-        System.out.println();
+    public void printExercise3(){
 
+        ArrayList<String> wordList = new ArrayList();
+        wordList.addAll(StringList.getFirstNameList());
+        wordList.addAll(StringList.getPlaceList());
+
+        for (int i = 0; i < wordList.size(); i++) {
+            String originalString = wordList.get(i);
+            String lowercaseString = originalString.toLowerCase();
+            wordList.set(i, lowercaseString);
+        }
+
+        int count = 0;
+        for (String word : wordList){
+            if(isPalindrome(word)){
+                System.out.println( ConsoleStyling.color(word, ConsoleStyling.Color.GREEN, true) + " - is a palindrome!" );
+                count++;
+            }
+        }
+        System.out.println("-".repeat(50));
+        System.out.println( ConsoleStyling.color( "Result: ", ConsoleStyling.Color.WHITE, false));
+        System.out.println( ConsoleStyling.color( String.valueOf(count), ConsoleStyling.Color.GREEN, true) + " entries were palindromes!");
+        System.out.println( ConsoleStyling.color( (String.valueOf(wordList.size() - count) ), ConsoleStyling.Color.ORANGE, true) + " were not!");
     }
+    //endregion
+
+
 
 }
