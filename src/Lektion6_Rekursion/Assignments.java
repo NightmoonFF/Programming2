@@ -10,7 +10,7 @@ import java.util.Random;
 public class Assignments implements Dispatchable {
 
     //region Exercise 1
-    private ArrayList evenNumbersHelper(ArrayList<Integer> numberList, int i){
+    private ArrayList<Integer> evenNumbersHelper(ArrayList<Integer> numberList, int i){
         i--;
         if(i == 0){
             return numberList;
