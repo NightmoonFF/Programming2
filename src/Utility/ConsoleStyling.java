@@ -5,6 +5,7 @@ import java.awt.*;
 import static Utility.ConsoleStyling.Color.*;
 
 public abstract class ConsoleStyling {
+
     public enum Color{
         RED,
         GREEN,
@@ -15,7 +16,7 @@ public abstract class ConsoleStyling {
         PINK,
         BROWN,
         WHITE,
-        Color, BLACK
+        BLACK
     }
 
 
