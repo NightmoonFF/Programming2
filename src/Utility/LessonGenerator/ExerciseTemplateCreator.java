@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -24,29 +25,28 @@ public class ExerciseTemplateCreator extends Application{
     }
 
     private static void initGUI(Stage primaryStage){
-        // Create Package Name
+
+        //region Create Package Name
         Label lblPkName = new Label("Package Name: ");
+        lblPkName.setAlignment(Pos.BASELINE_CENTER);
         TextField txfPackageName = new TextField();
         txfPackageName.setPrefSize(100, 20);
         txfPackageName.setMaxSize(250, 20);
+        txfPackageName.setAlignment(Pos.BASELINE_CENTER);
+        //endregion
 
-        // Create Navigation bar
-        Button btnPrevious = new Button("Previous");
+        //region Create Navigation bar
+        Button btnPrevious = new Button("Back");
         btnPrevious.setOnAction(e -> previousPage());
         btnPrevious.setAlignment(Pos.BASELINE_LEFT);
 
         Label lblExercise = new Label("Exercise " + currentExercisePage);
         lblExercise.setAlignment(Pos.BASELINE_CENTER);
+        lblExercise.setFont(Font.font ("Verdana", 20));
 
         Button btnNext = new Button("Next");
         btnNext.setOnAction(e -> nextPage());
         btnNext.setAlignment(Pos.BASELINE_RIGHT);
-
-
-        HBox hbxNavigation = new HBox();
-        hbxNavigation.setAlignment(Pos.BASELINE_CENTER);
-        hbxNavigation.setMinSize(500, 20);
-        hbxNavigation.setPrefSize(500, 20);
 
         // Create empty regions (panes) for left and right alignment
         Pane leftSpacer = new Pane();
@@ -55,10 +55,16 @@ public class ExerciseTemplateCreator extends Application{
         HBox.setHgrow(rightSpacer, Priority.ALWAYS); // Expand to fill available space
 
 
-
+        HBox hbxNavigation = new HBox();
+        hbxNavigation.setAlignment(Pos.BASELINE_CENTER);
+        hbxNavigation.setMinSize(600, 20);
+        hbxNavigation.setPrefSize(600, 20);
+        hbxNavigation.setMaxSize(600, 20);
         hbxNavigation.getChildren().addAll(btnPrevious,leftSpacer, lblExercise,rightSpacer, btnNext);
-        //endregion
 
+        //label for end of navigation
+        Label lblSpacer = new Label();
+        //endregion
 
         //region Create DescriptionField
         TextArea txaDescription = new TextArea("bop");
@@ -66,7 +72,6 @@ public class ExerciseTemplateCreator extends Application{
         txaDescription.setMinSize(600, 450);
         txaDescription.setMaxSize(600, 450);
         //endregion
-
 
         //region Create Button
         Button btnConfirm = new Button("Confirm");
@@ -77,7 +82,7 @@ public class ExerciseTemplateCreator extends Application{
         //region Create Main Vbox
         VBox vbxMain = new VBox(10);
         vbxMain.setAlignment(Pos.TOP_CENTER);
-        vbxMain.getChildren().addAll(lblPkName, txfPackageName, hbxNavigation, txaDescription);
+        vbxMain.getChildren().addAll(lblPkName, txfPackageName, hbxNavigation, lblSpacer, txaDescription);
         //endregion
 
         //region Create Border Pane
@@ -100,7 +105,6 @@ public class ExerciseTemplateCreator extends Application{
         primaryStage.show();
         //endregion
     }
-
     private static void nextPage(){
         //save the previous textArea line for line into the arraylist as an array of strings in order
         //dont forget to also do for button
@@ -108,7 +112,6 @@ public class ExerciseTemplateCreator extends Application{
     private static void previousPage(){
 
     }
-
     private static void generateLesson() {
 //            try {
 //
@@ -134,6 +137,10 @@ public class ExerciseTemplateCreator extends Application{
 //                e.printStackTrace();
 //            }
         }
+    private static void saveExcTextToArray(){
+
+
+    }
 
 
     /*
@@ -154,10 +161,6 @@ public class ExerciseTemplateCreator extends Application{
 
 
      */
-
-
-
-
 
 }
 
