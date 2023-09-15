@@ -1,6 +1,7 @@
 package Utility.LessonGenerator;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,20 +9,25 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class ExerciseTemplateCreator extends Application{
-
     static VBox vbxScroll;
-
     static ArrayList<String[]> exerciseDescriptions = new ArrayList<>();
-    static int currentExercisePage;
+    static int currentExercisePage = 0;
+    static TextArea txaDescription;
+    static Button btnPrevious;
+    static Label lblExercise;
     @Override
     public void start(Stage primaryStage) {
-
         initGUI(primaryStage);
-
     }
 
     private static void initGUI(Stage primaryStage){
@@ -36,11 +42,12 @@ public class ExerciseTemplateCreator extends Application{
         //endregion
 
         //region Create Navigation bar
-        Button btnPrevious = new Button("Back");
+        btnPrevious = new Button("Back");
         btnPrevious.setOnAction(e -> previousPage());
         btnPrevious.setAlignment(Pos.BASELINE_LEFT);
+        btnPrevious.setDisable(true);
 
-        Label lblExercise = new Label("Exercise " + currentExercisePage);
+        lblExercise = new Label("Exercise " + "1");
         lblExercise.setAlignment(Pos.BASELINE_CENTER);
         lblExercise.setFont(Font.font ("Verdana", 20));
 
@@ -67,7 +74,7 @@ public class ExerciseTemplateCreator extends Application{
         //endregion
 
         //region Create DescriptionField
-        TextArea txaDescription = new TextArea("bop");
+        txaDescription = new TextArea("...");
         txaDescription.setPrefSize(600, 450);
         txaDescription.setMinSize(600, 450);
         txaDescription.setMaxSize(600, 450);
@@ -76,7 +83,7 @@ public class ExerciseTemplateCreator extends Application{
         //region Create Button
         Button btnConfirm = new Button("Confirm");
         btnConfirm.setPrefSize(150, 50);
-        btnConfirm.setOnAction(e -> generateLesson());
+        btnConfirm.setOnAction(e -> createPackage(txfPackageName.getText()));
         //endregion
 
         //region Create Main Vbox
@@ -106,112 +113,185 @@ public class ExerciseTemplateCreator extends Application{
         //endregion
     }
     private static void nextPage(){
-        //save the previous textArea line for line into the arraylist as an array of strings in order
-        //dont forget to also do for button
+        btnPrevious.setDisable(false);
+        saveExerciseToArray();
+        currentExercisePage++;
+        pasteExerciseFromArray();
+        lblExercise.setText("Exercise " + String.valueOf(currentExercisePage+1));
     }
     private static void previousPage(){
+        saveExerciseToArray();
+        currentExercisePage--;
+        pasteExerciseFromArray();
 
-    }
-    private static void generateLesson() {
-//            try {
-//
-//
-//                String filePath = "src/Utility/LessonGenerator/ExerciseTemplate_Output.java";
-//
-//                BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
-//
-//                writer.write("/**");
-//                writer.newLine();
-//                writer.write(" * Author: " + author);
-//                writer.newLine();
-//                writer.write(" * Date: " + date);
-//                writer.newLine();
-//                writer.write(" * Description: " + description);
-//                writer.newLine();
-//                writer.write(" */");
-//                writer.newLine();
-//
-//                writer.close();
-//                System.out.println("Code comment added to " + filePath);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+        if(currentExercisePage == 0){
+            btnPrevious.setDisable(true);
         }
-    private static void saveExcTextToArray(){
 
+        lblExercise.setText("Exercise " + String.valueOf(currentExercisePage+1));
+    }
+    private static void pasteExerciseFromArray(){
+        if (currentExercisePage >= 0 && currentExercisePage < exerciseDescriptions.size()) {
+
+            StringBuilder sb = new StringBuilder();
+            for (String line : exerciseDescriptions.get(currentExercisePage)) {
+                sb.append(line).append("\n");
+            }
+            String text = sb.toString();
+
+
+            txaDescription.setText(text);
+
+        } else {
+            txaDescription.clear();
+        }
+    }
+    private static void saveExerciseToArray(){
+
+        if (txaDescription.getText().length() > 1){
+
+            String text = txaDescription.getText();
+            String[] lines = text.split("\n");
+
+            String[] storedLines = new String[lines.length];
+
+            for (int i = 0; i < lines.length; i++) {
+                storedLines[i] = lines[i];
+            }
+
+            if (exerciseDescriptions.size() > currentExercisePage){
+                exerciseDescriptions.set(currentExercisePage, storedLines);
+            } else{
+                exerciseDescriptions.add(currentExercisePage, storedLines);
+            }
+        }
+    }
+    public static void createPackage(String pkgName){
+
+        saveExerciseToArray();
+
+        String directoryPath = "src" + File.separator + pkgName; // Specify the directory path
+        Path directory = Paths.get(directoryPath); // Create a Path object for the directory
+
+        //region Create Directory
+        if (!Files.exists(directory)) {
+            try {
+                // Attempt to create the directory
+                Files.createDirectory(directory);
+                System.out.println("Directory created successfully.");
+            } catch (IOException e) {
+                System.err.println("Failed to create directory: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Directory already exists.");
+        }
+        //endregion
+
+        //region Create AppClass
+        try {
+            Files.createFile(Paths.get(directory + File.separator + "App.java"));
+            System.out.println("App Class created successfully.");
+        } catch (IOException e) {
+            System.err.println("Failed to create file: " + e.getMessage());
+        }
+
+        try {
+            // Create a FileWriter object
+            FileWriter writer = new FileWriter(directory + File.separator + "App.java");
+            // Write content to the file
+            writer.write("package " + pkgName + ";\n\n");
+            writer.write("public class App {\n");
+            writer.write("    public static void main(String[] args) {\n");
+            writer.write("        new Exercises().dispatch();");
+            writer.write("    }\n");
+            writer.write("}\n");
+            // Close the FileWriter
+            writer.close();
+
+            System.out.println("Content written to App.java successfully.");
+        } catch (IOException e) {
+            System.err.println("Failed to write to the file: " + e.getMessage());
+        }
+        //endregion
+
+        //region Create ExerciseClass
+        try {
+            Files.createFile(Paths.get(directory + File.separator + "Exercises.java"));
+            System.out.println("Exercises Class created successfully.");
+        } catch (IOException e) {
+            System.err.println("Failed to create file: " + e.getMessage());
+        }
+
+        try {
+            // Create a FileWriter object
+            FileWriter writer = new FileWriter(directory + File.separator + "Exercises.java");
+            // Write content to the file
+            writer.write("package " + pkgName + ";\n\n");
+            writer.write("public class App {\n");
+            // Close the FileWriter
+            writer.close();
+            System.out.println("Content written to Exercises.java successfully.");
+        } catch (IOException e) {
+            System.err.println("Failed to write to the file: " + e.getMessage());
+        }
+        //endregion
+        printExercises(pkgName);
+        Platform.exit();
+
+    }
+    public static void printExercises(String pkgName){
+
+        String directoryPath = "src" + File.separator + pkgName;
+
+        try{
+            FileWriter writer = new FileWriter(directoryPath + File.separator + "Exercises.java");
+
+            //TODO: write the beginning - import, package, class, etc
+
+            //for each exercise
+            for(String[] exercises : exerciseDescriptions){
+
+                //TODO: write top of box + region
+
+                //for each line of text
+                for(String s : exercises){
+
+
+                    writer.write("    │" + s + "spaces equal to max line length, minus s.length + 4" + "│" + "\n");
+
+
+
+                }
+
+                //TODO: write bottom of box
+                //TODO: write method printExerciseX()
+                //TODO: write endregion
+
+            }
+            writer.close();
+            System.out.println("Content of each exercise written to Exercises.java successfully.");
+        }
+        catch (IOException e){
+            System.err.println("Failed to write to the file: " + e.getMessage());
+        }
 
     }
 
-
-    /*
-
-    Create the header of the box
-    Then input all text.
-    Allign text left.
-    Auto generate a Header (Exercise X),
-    then do a blank line
-    do the ²|" lines on the left, 4 spaces before, 4 spaces after
-    Then find longest line, move over 4 spaces, and add a "|" to the right
-    Make the "|" on other lines, at same place
-    Make bottom of box
-
-
-
-
-
-
-     */
 
 }
 
+//set a max line length, then make the 4 spaces, then line
 
-
-
-
-//region ASCII
-    /*
-        Single Lines:
-        Horizontal: ─
-        Vertical: │
-
-    Double Lines:
-        Horizontal: ═
-        Vertical: ║
-
-    Corners:
-        Top Left: ┌
-        Top Right: ┐
-        Bottom Left: └
-        Bottom Right: ┘
-
-    T-Junctions:
-        T-Top: ┬
-        T-Bottom: ┴
-        T-Left: ├
-        T-Right: ┤
-
-    Cross:
-        Cross: ┼
-
-    Dotted Lines:
-        Dotted Horizontal: ·
-        Dotted Vertical: :
-
-    Diagonal Lines:
-        Forward Slash (/): /
-        Backslash (): \
-     */
-//endregion
+// Preview of output:
 
 /*
-    Preview of output:
-    ┌─────────────────────────────────────────────────────────────────────────────────┐
-    │                                                                                 |
-    |    Exercise 1                                                                   |
-    |                                                                                 |
-    |    Write a recursive method that totals all the elements in a List<Integer>.    |
-    |    Use the template from                                                        |
-    |    Divide-Solve-Combine (Del, løs og kombiner).                                 |
-    |                                                                                 |
-    └─────────────────────────────────────────────────────────────────────────────────┘
+    ┌────────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                            │
+    │    Exercise 1                                                                              │
+    │                                                                                            │
+    │    Write a recursive method that totals all the elements in a List<Integer>.               │
+    │    Use the template from                                                                   │
+    │    Divide-Solve-Combine (Del, løs og kombiner).                                            │
+    │                                                                                            │
+    └────────────────────────────────────────────────────────────────────────────────────────────┘
 */
