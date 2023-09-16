@@ -78,6 +78,7 @@ public class ExerciseTemplateCreator extends Application{
         txaDescription.setPrefSize(600, 450);
         txaDescription.setMinSize(600, 450);
         txaDescription.setMaxSize(600, 450);
+        txaDescription.setWrapText(true);
         //endregion
 
         //region Create Button
@@ -248,25 +249,31 @@ public class ExerciseTemplateCreator extends Application{
 
             //TODO: write the beginning - import, package, class, etc
 
+            int count = 1;
             //for each exercise
             for(String[] exercises : exerciseDescriptions){
 
-                //TODO: write top of box + region
+                // Create Top of Box
+                String exerciseTitle = "Exercise " + count;
+                writer.write("/*\n");
+                writer.write("    ┌" + "─".repeat(72 + 4 + 4) + "┐\n");
+                writer.write("    │" + " ".repeat(72 + 4 + 4) + "│\n");
+                writer.write("    │" + exerciseTitle + " ".repeat(72 - exerciseTitle.length()) + "    │\n");
+                writer.write("    │" + " ".repeat(72 + 4 + 4) + "│\n");
 
+                //TODO: make a line of text not able to exceed 72. Maybe make font monospace to get accurage from textbox
                 //for each line of text
                 for(String s : exercises){
-
-
-                    writer.write("    │" + s + "spaces equal to max line length, minus s.length + 4" + "│" + "\n");
-
-
-
+                    writer.write("    │    " + s + " ".repeat(72 - s.length()) + "    │" + "\n");
                 }
+                writer.write("*/\n");
 
                 //TODO: write bottom of box
+                //TODO: write region
                 //TODO: write method printExerciseX()
                 //TODO: write endregion
 
+                count++;
             }
             writer.close();
             System.out.println("Content of each exercise written to Exercises.java successfully.");
@@ -274,24 +281,23 @@ public class ExerciseTemplateCreator extends Application{
         catch (IOException e){
             System.err.println("Failed to write to the file: " + e.getMessage());
         }
-
     }
-
 
 }
 
-//set a max line length, then make the 4 spaces, then line
+//set a max line length, then make the 4 spaces, then line --72 max?
 
 // Preview of output:
 
 /*
-    ┌────────────────────────────────────────────────────────────────────────────────────────────┐
-    │                                                                                            │
-    │    Exercise 1                                                                              │
-    │                                                                                            │
-    │    Write a recursive method that totals all the elements in a List<Integer>.               │
-    │    Use the template from                                                                   │
-    │    Divide-Solve-Combine (Del, løs og kombiner).                                            │
-    │                                                                                            │
-    └────────────────────────────────────────────────────────────────────────────────────────────┘
+    │    opejgpaepå...jopejgpaepå...jopejgpaepå...jopejgpaepå...jopejgpaepå...jopejgpaepå opgjggg    │
+    ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                                │
+    │    Exercise 1                                                                                  │
+    │                                                                                                │
+    │    Write a recursive method that totals all the elements in a List<Integer>.                   │
+    │    Use the template from                                                                       │
+    │    Divide-Solve-Combine (Del, løs og kombiner).                                                │
+    │                                                                                                │
+    └────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
