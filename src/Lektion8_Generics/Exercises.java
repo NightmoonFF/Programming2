@@ -30,11 +30,10 @@ public class Exercises implements Dispatchable {
     │                                                                                                            │
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
-    //region Exercise 1
+
     private static void printExercise1(){
 
     }
-    //endregion
 
 
 
@@ -55,11 +54,10 @@ public class Exercises implements Dispatchable {
     │                                                                                                            │
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
-    //region Exercise 2
+
     private static void printExercise2(){
 
     }
-    //endregion
 
 
 
@@ -75,11 +73,10 @@ public class Exercises implements Dispatchable {
     │                                                                                                            │
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
-    //region Exercise 3
+
     private static void printExercise3(){
 
     }
-    //endregion
 
 
 
@@ -95,11 +92,10 @@ public class Exercises implements Dispatchable {
     │                                                                                                            │
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
-    //region Exercise 4
+
     private static void printExercise4(){
 
     }
-    //endregion
 
 
 

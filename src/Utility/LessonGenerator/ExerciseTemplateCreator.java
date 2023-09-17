@@ -1,5 +1,6 @@
 package Utility.LessonGenerator;
 
+import Utility.ConsoleStyling;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -290,13 +291,12 @@ public class ExerciseTemplateCreator extends Application{
 
         try{
             FileWriter writer = new FileWriter(directoryPath + File.separator + "Exercises.java");
+            int count = 1;
 
-            //TODO: write the beginning - import, package, class, etc
+            // Write Class Header
             writer.write("package " + pkgName + ";\n");
             writer.write("public class Exercises implements Dispatchable {\n");
 
-
-            int count = 1;
             //for each exercise
             for(String[] exercises : exerciseDescriptions){
 
@@ -308,26 +308,28 @@ public class ExerciseTemplateCreator extends Application{
                 writer.write("    │    " + exerciseTitle + " ".repeat(100 - exerciseTitle.length()) + "    │\n");
                 writer.write("    │" + " ".repeat(100 + 4 + 4) + "│\n");
 
-                // for each line of text
+                // Write each line of text
                 for(String s : exercises){
                     writer.write("    │    " + s + " ".repeat(100 - s.length()) + "    │" + "\n");
                 }
 
-
+                // Create Bottom of box
                 writer.write("    │" + " ".repeat(100 + 4 + 4) + "│\n");
                 writer.write("    └" + "─".repeat(100 + 4 + 4) + "┘\n");
                 writer.write("*/\n");
-                writer.write("    //region Exercise " + count + "\n");
+                writer.write("\n"); //writer.write("    //region Exercise " + count + "\n");
                 writer.write("    public static void printExercise" + count + "(){\n");
                 writer.write("\n");
                 writer.write("    }\n");
-                writer.write("    //endregion\n");
+                //writer.write("    //endregion\n");
                 writer.write("\n\n\n");
                 count++;
             }
+
+            // Write class footer, and close the writer
             writer.write("}\n");
             writer.close();
-            System.out.println("Content of each exercise written to Exercises.java successfully.");
+            System.out.println(ConsoleStyling.color("Content of each exercise written to Exercises.java successfully.", ConsoleStyling.Color.GREEN, true));
         }
         catch (IOException e){
             System.err.println("Failed to write to the file: " + e.getMessage());
@@ -335,20 +337,3 @@ public class ExerciseTemplateCreator extends Application{
     }
 
 }
-
-//set a max line length, then make the 4 spaces, then line --72 max?
-
-// Preview of output:
-
-/*
-    │    opejgpaepå...jopejgpaepå...jopejgpaepå...jopejgpaepå...jopejgpaepå...jopejgpaepå opgjggg    │
-    ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-    │                                                                                                │
-    │    Exercise 1                                                                                  │
-    │                                                                                                │
-    │    Write a recursive method that totals all the elements in a List<Integer>.                   │
-    │    Use the template from                                                                       │
-    │    Divide-Solve-Combine (Del, løs og kombiner).                                                │
-    │                                                                                                │
-    └────────────────────────────────────────────────────────────────────────────────────────────────┘
-*/
