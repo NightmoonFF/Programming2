@@ -1,3 +1,4 @@
 out/
 .idea/
 *.iml
+/src/Lektion6_Rekursion/.directory

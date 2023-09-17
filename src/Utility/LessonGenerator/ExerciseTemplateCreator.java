@@ -2,12 +2,19 @@ package Utility.LessonGenerator;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileWriter;
@@ -17,6 +24,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
+import java.util.function.UnaryOperator;
 
 public class ExerciseTemplateCreator extends Application{
     static VBox vbxScroll;
@@ -28,6 +37,40 @@ public class ExerciseTemplateCreator extends Application{
     @Override
     public void start(Stage primaryStage) {
         initGUI(primaryStage);
+    }
+
+    private static Text formatRed(String text) {
+        Text redText = new Text(text);
+        redText.setFill(Color.RED);
+        return redText;
+    }
+    private static final int CHARACTER_LIMIT = 100;
+    private static void limitText(){
+
+        // Add a listener to enforce the character limit
+        txaDescription.textProperty().addListener((observable, oldValue, newValue) -> {
+            String[] lines = newValue.split("\n");
+            StringBuilder newText = new StringBuilder();
+
+            for (String line : lines) {
+                if (line.length() > CHARACTER_LIMIT) {
+                    String trimmedLine = line.substring(0, CHARACTER_LIMIT);
+                    newText.append(trimmedLine).append("\n");
+                    while (line.length() > CHARACTER_LIMIT) {
+                        line = line.substring(CHARACTER_LIMIT);
+                        newText.append(line, 0, Math.min(line.length(), CHARACTER_LIMIT)).append("\n");
+                    }
+                } else {
+                    newText.append(line).append("\n");
+                }
+            }
+
+            // Remove extra newline at the end
+            newText.setLength(newText.length() - 1);
+
+            txaDescription.setText(newText.toString());
+        });
+
     }
 
     private static void initGUI(Stage primaryStage){
@@ -79,6 +122,7 @@ public class ExerciseTemplateCreator extends Application{
         txaDescription.setMinSize(600, 450);
         txaDescription.setMaxSize(600, 450);
         txaDescription.setWrapText(true);
+        limitText();
         //endregion
 
         //region Create Button
@@ -248,6 +292,9 @@ public class ExerciseTemplateCreator extends Application{
             FileWriter writer = new FileWriter(directoryPath + File.separator + "Exercises.java");
 
             //TODO: write the beginning - import, package, class, etc
+            writer.write("package " + pkgName + ";\n");
+            writer.write("public class Exercises implements Dispatchable {\n");
+
 
             int count = 1;
             //for each exercise
@@ -256,25 +303,29 @@ public class ExerciseTemplateCreator extends Application{
                 // Create Top of Box
                 String exerciseTitle = "Exercise " + count;
                 writer.write("/*\n");
-                writer.write("    ┌" + "─".repeat(72 + 4 + 4) + "┐\n");
-                writer.write("    │" + " ".repeat(72 + 4 + 4) + "│\n");
-                writer.write("    │" + exerciseTitle + " ".repeat(72 - exerciseTitle.length()) + "    │\n");
-                writer.write("    │" + " ".repeat(72 + 4 + 4) + "│\n");
+                writer.write("    ┌" + "─".repeat(100 + 4 + 4) + "┐\n");
+                writer.write("    │" + " ".repeat(100 + 4 + 4) + "│\n");
+                writer.write("    │    " + exerciseTitle + " ".repeat(100 - exerciseTitle.length()) + "    │\n");
+                writer.write("    │" + " ".repeat(100 + 4 + 4) + "│\n");
 
-                //TODO: make a line of text not able to exceed 72. Maybe make font monospace to get accurage from textbox
-                //for each line of text
+                // for each line of text
                 for(String s : exercises){
-                    writer.write("    │    " + s + " ".repeat(72 - s.length()) + "    │" + "\n");
+                    writer.write("    │    " + s + " ".repeat(100 - s.length()) + "    │" + "\n");
                 }
+
+
+                writer.write("    │" + " ".repeat(100 + 4 + 4) + "│\n");
+                writer.write("    └" + "─".repeat(100 + 4 + 4) + "┘\n");
                 writer.write("*/\n");
-
-                //TODO: write bottom of box
-                //TODO: write region
-                //TODO: write method printExerciseX()
-                //TODO: write endregion
-
+                writer.write("    //region Exercise " + count + "\n");
+                writer.write("    public static void printExercise" + count + "(){\n");
+                writer.write("\n");
+                writer.write("    }\n");
+                writer.write("    //endregion\n");
+                writer.write("\n\n\n");
                 count++;
             }
+            writer.write("}\n");
             writer.close();
             System.out.println("Content of each exercise written to Exercises.java successfully.");
         }
