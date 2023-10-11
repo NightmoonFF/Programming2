@@ -1,4 +1,4 @@
-package demopolymorphism.sound;
+package PRO.Lektion1_Git_og_superklasser.DemoPolymorphisme.sound;
 
 public class App {
 

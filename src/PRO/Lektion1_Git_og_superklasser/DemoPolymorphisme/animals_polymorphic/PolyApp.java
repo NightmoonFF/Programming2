@@ -1,4 +1,4 @@
-package demopolymorphism.animals_polymorphic;
+package PRO.Lektion1_Git_og_superklasser.DemoPolymorphisme.animals_polymorphic;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package demopolymorphism.animals;
+package PRO.Lektion1_Git_og_superklasser.DemoPolymorphisme.animals;
 
 public class App {
 
