@@ -1,6 +1,6 @@
 package PRO.Lektion3_Interfaces.Opgave3;
 import Utility.ConsoleStyling;
-import Utility.Currency;
+import Utility.MathUtil;
 
 import java.util.*;
 
@@ -87,7 +87,7 @@ public class App {
         // Print Total
         System.out.println("****************");
         System.out.print(ConsoleStyling.color("TOTAL:         ", ConsoleStyling.Color.WHITE, true));
-        System.out.print( ConsoleStyling.color(String.valueOf(Currency.roundToNearestHalfOrWhole(totalPrice)), ConsoleStyling.Color.WHITE, true) );
+        System.out.print( ConsoleStyling.color(String.valueOf(MathUtil.roundToNearestHalfOrWhole(totalPrice)), ConsoleStyling.Color.WHITE, true) );
         System.out.println();
 
 
