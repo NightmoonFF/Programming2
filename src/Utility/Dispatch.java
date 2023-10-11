@@ -116,7 +116,7 @@ public class Dispatch {
 
     /**
      * Execute method based on the selected index
-     * @param index
+     * @param i - index
      */
     private static void dispatchTableEntry(int i) {
         if (i >= 0 && i < tableSize && table[i] != null) {

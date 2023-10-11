@@ -3,15 +3,10 @@ package Utility.LessonGenerator;
 import Utility.ConsoleStyling;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -20,13 +15,10 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
-import java.util.function.UnaryOperator;
 
 public class ExerciseTemplateCreator extends Application{
     static VBox vbxScroll;
@@ -39,6 +31,10 @@ public class ExerciseTemplateCreator extends Application{
     public void start(Stage primaryStage) {
         initGUI(primaryStage);
     }
+
+    //TODO: Redefine where packages are made, they are now inside of /PRO/
+    //TODO: Make pakcages for each exercise instead of all in one document. Make the Exercises class PrintExercises, or add them to App
+
 
     private static Text formatRed(String text) {
         Text redText = new Text(text);
