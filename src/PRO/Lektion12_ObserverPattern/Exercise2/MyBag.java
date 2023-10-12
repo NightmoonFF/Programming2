@@ -46,14 +46,10 @@ public class MyBag implements ObservableBag{
     }
     @Override
     public void getCount() {
-
         for(Map.Entry<String, Integer> entry : elements.entrySet()){
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
-
-
     }
-
     private void notifyObservers(String element, int count){
         for (Observer observer : observers){
             observer.update(element, count);

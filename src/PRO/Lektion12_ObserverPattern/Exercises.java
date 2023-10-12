@@ -87,6 +87,7 @@ public class Exercises implements Dispatchable {
         observableBag.removeElement("Grillpølse");
 
         System.out.println("--".repeat(50));
+
         observableBag.getCount();
 
     }

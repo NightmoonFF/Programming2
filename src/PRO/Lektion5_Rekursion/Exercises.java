@@ -221,7 +221,7 @@ public class Exercises {
         for(File f : root.listFiles()) {
             if (!f.isDirectory()) {
                 if (level == 0) {
-                    System.out.println("  " + " └─" + f.getName());
+                    System.out.println("  ".repeat(level) + " └─" + f.getName());
                 } else {
                     System.out.println("  ".repeat(level) + " └─" + f.getName());
                 }
@@ -230,7 +230,7 @@ public class Exercises {
         for(File f : root.listFiles()){
             if (f.isDirectory()){
                 if(level == 0){
-                    System.out.println(ConsoleStyling.color("  " + f.getName(), ConsoleStyling.Color.WHITE, true));
+                    System.out.println(ConsoleStyling.color("  ".repeat(level) + f.getName(), ConsoleStyling.Color.WHITE, true));
                     scanDirHelper(f.getPath(), level + 1);
                 } else{
                     System.out.println(ConsoleStyling.color("  ".repeat(level) + f.getName(), ConsoleStyling.Color.WHITE, true));

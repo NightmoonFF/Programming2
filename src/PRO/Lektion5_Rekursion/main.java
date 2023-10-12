@@ -15,6 +15,6 @@ public class main {
 //        Exercises.PrintExercise4();
 
         System.out.println("\nExercise5:\n");
-        Exercises.scanDir("/home/salena/Development/IdeaProjects/Programming2/src/PRO");
+        Exercises.scanDir("/home/elias/IdeaProjects/Programming 2/src/PRO");
     }
 }

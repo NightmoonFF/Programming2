@@ -32,8 +32,9 @@ public class ExerciseTemplateCreator extends Application{
         initGUI(primaryStage);
     }
 
-    //TODO: Redefine where packages are made, they are now inside of /PRO/
-    //TODO: Make pakcages for each exercise instead of all in one document. Make the Exercises class PrintExercises, or add them to App
+    //TODO: Rename App to main. I believe App is only for JavaFX application
+    //TODO: Make pakcages for each exercise instead of all in one document.
+    //TODO: Delete exercises class, and have print methods for each exercise in main
 
 
     private static Text formatRed(String text) {
@@ -212,7 +213,7 @@ public class ExerciseTemplateCreator extends Application{
 
         saveExerciseToArray();
 
-        String directoryPath = "src" + File.separator + pkgName; // Specify the directory path
+        String directoryPath = "src" + File.separator + "PRO" + File.separator + pkgName; // Specify the directory path
         Path directory = Paths.get(directoryPath); // Create a Path object for the directory
 
         //region Create Directory
@@ -283,7 +284,7 @@ public class ExerciseTemplateCreator extends Application{
     }
     public static void printExercises(String pkgName){
 
-        String directoryPath = "src" + File.separator + pkgName;
+        String directoryPath = "src" + File.separator + "PRO" + File.separator + pkgName;
 
         try{
             FileWriter writer = new FileWriter(directoryPath + File.separator + "Exercises.java");
