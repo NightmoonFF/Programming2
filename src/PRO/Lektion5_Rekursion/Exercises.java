@@ -1,7 +1,8 @@
 package PRO.Lektion5_Rekursion;
 
-import Utility.MathUtil;
+import Utility.ConsoleStyling;
 
+import java.io.File;
 import java.util.Random;
 
 public class Exercises {
@@ -104,6 +105,7 @@ public class Exercises {
         System.out.println(power2(4, 3));
     }
 
+
     /**
      * Exercise 3
      * Write a recursive method public int prod(int a, int b) that calculates a*b (a
@@ -137,7 +139,6 @@ public class Exercises {
         }
         else { return prod(a - 1, b) + b; }
     }
-
     public static void PrintExercise3(){
         double startTime = System.nanoTime();
         System.out.println("prod(21, 47): ");
@@ -152,6 +153,120 @@ public class Exercises {
         System.out.println("Executed in: " + ((endTime - startTime)) + " nanoseconds");
 
 
+    }
+
+
+    /**
+     * Exercise 4
+     * In this exercise you must write a recursive method
+     * public String reverse(String s)
+     * that returns s with the characters in reverse order. Example: reverse(”RANSLIRPA”) is
+     * ”APRILSNAR”.
+     * First you have to write down the recursive definition, and then you must program the method.
+     */
+    public static String reverse(String s){
+        /**
+         * Base:
+         * s[0] = s if length <= 1
+         * Rekursive:
+         * s = s[length(s) − 1] + reverse( s[1 : length(s) − 1] ) + s[0]
+         * --------------------------------------------------------------
+         * Explanation:
+         * s[length(s) - 1] = the character at position equal to total characters - 1 (the last char)
+         * s[1 : length(s) - 1] = the range of chars from s[1] to s[length(s) - 1] (s excluding first and last char)
+         * s[0] = the first character
+         * --------------------------------------------------------------
+         * Laymans terms:
+         * pick a word.
+         * write down the last letter, then the first letter of the word far apart. (last first, since it's reversed)
+         * Between those, write down the 2nd last letter, then the 2nd letter of the word (exclude letters from before)
+         * repeat until there is either one letter left, or no letters left. If one is left, write down the final one.
+         * (the final one left would be the same both normal order and reversed order, since its exactly in the middle)
+         * Example with "Apple":
+         * E   A
+         * EL PA
+         * ELPPA
+         */
+        if (s.length() <= 1) { return s; }
+        else{
+            return s.charAt(s.length() - 1) + reverse(s.substring(1, s.length() - 1)) + s.charAt(0);
+        }
+
+    }
+    public static void PrintExercise4(){
+        System.out.println("Reverse of RANSLIRPA:");
+        System.out.println(reverse("RANSLIRPA"));
+
+    }
+
+
+    /**
+     * Exercise 5
+     * Make a method that recursively traverses through all directories contained in the folder given
+     * by the path parameter and prints the names of all directories found:
+     * public static void scanDir(String path)
+     * Hint: Create a File object from the path and use the list() and isDirectory() methods in the File
+     * class.
+     * Make a method that can also write the level of the directory before the directory name (level
+     * of the start directory is 1)
+     */
+    public static void scanDir(String path){
+        scanDirHelper(path, 0);
+    }
+    private static void scanDirHelper(String path, int level){
+        //TODO: some directories are not indented? Otherwise almost works as intended
+        File root = new File(path);
+
+        if(level == 0) { System.out.println(ConsoleStyling.color(root.getName(), ConsoleStyling.Color.WHITE, true)); }
+
+        for(File f : root.listFiles()) {
+            if (!f.isDirectory()) {
+                if (level == 0) {
+                    System.out.println("  " + " └─" + f.getName());
+                } else {
+                    System.out.println("  ".repeat(level) + " └─" + f.getName());
+                }
+            }
+        }
+
+        for(File f : root.listFiles()){
+            if (f.isDirectory()){
+                if(level == 0){
+                    System.out.println(ConsoleStyling.color("  " + f.getName(), ConsoleStyling.Color.WHITE, true));
+                    scanDirHelper(f.getPath(), level + 1);
+                } else{
+                    System.out.println(ConsoleStyling.color("  ".repeat(level) + f.getName(), ConsoleStyling.Color.WHITE, true));
+                    scanDirHelper(f.getPath(), level + 1);
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Exercise 6
+     * Write a recursive method that implements Euclid's algorithm for finding the greatest common
+     * divisor of two integers (both >= 2). The greatest common divisor is the largest integer that
+     * divides both values (with no remainder).
+     * Greatest common divisor gcd(b,a) is defined by:
+     *      gcd(a, b) = b if b <= a and b divides a
+     *      gcd(a, b) = gcd(b, a) if a < b
+     *      gcd(a, b) = gcd(b, a % b) otherwise
+     */
+    public static void PrintExercise6(){
+        //TODO:
+    }
+
+
+    /**
+     * Exercise 7
+     * A domino block is sized 2*1. An n-strip is a board sized 2*n. Make a method that calculates
+     * the number of ways an n-strip can be covered with domino blocks.
+     * Hint: First you must find the recursive formula for the function
+     * f(n) = number of ways an n-strip can be covered with domino blocks.
+     */
+    public static void PrintExercise7(){
+        //TODO:
     }
 
 }
