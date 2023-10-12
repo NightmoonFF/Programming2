@@ -216,7 +216,6 @@ public class Exercises {
     private static void scanDirHelper(String path, int level){
         //TODO: some directories are not indented? Otherwise almost works as intended
         File root = new File(path);
-
         if(level == 0) { System.out.println(ConsoleStyling.color(root.getName(), ConsoleStyling.Color.WHITE, true)); }
 
         for(File f : root.listFiles()) {
@@ -228,7 +227,6 @@ public class Exercises {
                 }
             }
         }
-
         for(File f : root.listFiles()){
             if (f.isDirectory()){
                 if(level == 0){
