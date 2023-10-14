@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DaycareTest {
-
     Daycare daycare = new Daycare();
     int actualResult;
+
     @Test
     void oneChild() {
         actualResult = daycare.totalPayment(1, 0);
@@ -46,20 +46,60 @@ class DaycareTest {
 
         // 1000 + ( (2000 * 0 + 1000 * 2) - 25%)
         actualResult = daycare.totalPayment(0, 3);
-        assertEquals(1750, actualResult);
+        assertEquals(2500, actualResult);
 
     }
 
     @Test
     void fourChildren() {
+
+        // 2000 + (2000-25%) + (1000-25%) + (1000-50%)
+        actualResult = daycare.totalPayment(2, 2);
+        assertEquals(4750, actualResult);
+
+        // 2000 + (1000-25%) + (1000-25%) + (1000-50%)
+        actualResult = daycare.totalPayment(1, 3);
+        assertEquals(4000, actualResult);
+
+        // 2000 + (2000-25%) + (2000-25%) + (1000-50%)
+        actualResult = daycare.totalPayment(3, 1);
+        assertEquals(5500, actualResult);
+
+        // 2000 + (2000-25%) + (2000-25%) + (2000-50%)
+        actualResult = daycare.totalPayment(4, 0);
+        assertEquals(6000, actualResult);
+
+        // 1000 + (1000-25%) + (1000-25%) + (1000-50%)
+        actualResult = daycare.totalPayment(0, 4);
+        assertEquals(3000, actualResult);
+
     }
 
     @Test
     void tenChildren() {
+
+        // 2000 + (2000-25%) + (2000-25%) + (  (2000-50%)*2 )  + ( (1000-50%) * 5) )
+        actualResult = daycare.totalPayment(5, 5);
+        assertEquals(9500, actualResult);
+
+        // 2000 + (2000-25%) + (2000-25%) + (  (2000-50%)*7 )  + ( (1000-50%) * 0) )
+        actualResult = daycare.totalPayment(10, 0);
+        assertEquals(12000, actualResult);
+
+        // 2000 + (2000-25%) + (2000-25%) + (  (2000-50%)*7 )  + ( (1000-50%) * 0) )
+        actualResult = daycare.totalPayment(0, 10);
+        assertEquals(6000, actualResult);
+
     }
 
     @Test
     void noChildren(){
+        assertThrows(RuntimeException.class, ()->{
+            daycare.totalPayment(0, 0);
+        });
 
+        assertThrows(RuntimeException.class, ()->{
+            daycare.totalPayment(-2, 5);
+        });
     }
 }
