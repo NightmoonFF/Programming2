@@ -27,24 +27,29 @@ public abstract class MathUtil {
 
     /**
      * Determines if an integer is even or odd
-     * @param n
+     * @param n -the integer to evaluate
      * @return true if even
      */
     public static boolean isEven(int n){
         // even, because the low bit will always be set on an odd number
-        if( (n & 1) == 0){ return true; }
-        else { return false; }
+        return (n & 1) == 0;
     }
 
     /**
      *  Rounds a double to the nearest half or whole number.
      *  Mostly for currencies like DKK which only has 50 cent coins
-     * @param value
+     * @param value the value to round
      * @return rounded result
      */
     public static double roundToNearestHalfOrWhole(double value) {
         int roundedIntValue = (int) Math.round(value * 2);
-        double roundedValue = roundedIntValue / 2.0;
-        return roundedValue;
+        return roundedIntValue / 2.0;
     }
+
+    public static int percentageReduction(double percentage, int n){
+        if(percentage > 100) { throw new IllegalArgumentException("Percentage cannot be above 100"); }
+        double d = n - (n * (percentage/100));
+        return (int) Math.round(d);
+    }
+
 }

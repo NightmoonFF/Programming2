@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 
 public class LibraryFee {
 
-
     /**
      * Return the fine according to the table above.
      * Pre: calculatedDate < actualDate
