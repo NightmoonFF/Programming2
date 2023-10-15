@@ -1,5 +1,6 @@
 package Utility.LessonGenerator;
 
+import Utility.MathUtil;
 import javafx.application.Application;
 
 public class App {

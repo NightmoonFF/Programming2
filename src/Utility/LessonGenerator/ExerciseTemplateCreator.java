@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.io.Console;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,17 +34,9 @@ public class ExerciseTemplateCreator extends Application{
         initGUI(primaryStage);
     }
 
-    //TODO: Rename App to main. I believe App is only for JavaFX application
-    //TODO: Make pakcages for each exercise instead of all in one document.
-    //TODO: Delete exercises class, and have print methods for each exercise in main
-
-
-    private static Text formatRed(String text) {
-        Text redText = new Text(text);
-        redText.setFill(Color.RED);
-        return redText;
-    }
     private static final int CHARACTER_LIMIT = 100;
+
+    //region GUI
     private static void limitText(){
 
         // Add a listener to enforce the character limit
@@ -70,7 +64,6 @@ public class ExerciseTemplateCreator extends Application{
         });
 
     }
-
     private static void initGUI(Stage primaryStage){
 
         //region Create Package Name
@@ -126,7 +119,7 @@ public class ExerciseTemplateCreator extends Application{
         //region Create Button
         Button btnConfirm = new Button("Confirm");
         btnConfirm.setPrefSize(150, 50);
-        btnConfirm.setOnAction(e -> createPackage(txfPackageName.getText()));
+        btnConfirm.setOnAction(e -> createPackages(txfPackageName.getText()));
         //endregion
 
         //region Create Main Vbox
@@ -198,9 +191,7 @@ public class ExerciseTemplateCreator extends Application{
 
             String[] storedLines = new String[lines.length];
 
-            for (int i = 0; i < lines.length; i++) {
-                storedLines[i] = lines[i];
-            }
+            System.arraycopy(lines, 0, storedLines, 0, lines.length);
 
             if (exerciseDescriptions.size() > currentExercisePage){
                 exerciseDescriptions.set(currentExercisePage, storedLines);
@@ -209,19 +200,25 @@ public class ExerciseTemplateCreator extends Application{
             }
         }
     }
-    public static void createPackage(String pkgName){
+    //endregion
+
+    //region File Creation
+    public static void createPackages(String pkgName){
 
         saveExerciseToArray();
 
+        //region Create Main Directory
         String directoryPath = "src" + File.separator + "PRO" + File.separator + pkgName; // Specify the directory path
-        Path directory = Paths.get(directoryPath); // Create a Path object for the directory
+        Path mainPath = Paths.get(directoryPath); // Create a Path object for the directory
 
-        //region Create Directory
-        if (!Files.exists(directory)) {
+        if (!Files.exists(mainPath)) {
             try {
-                // Attempt to create the directory
-                Files.createDirectory(directory);
-                System.out.println("Directory created successfully.");
+                Files.createDirectory(mainPath);
+                System.out.println(
+                            ConsoleStyling.color("Package: ", ConsoleStyling.Color.GREEN, true) +
+                            ConsoleStyling.color(pkgName, ConsoleStyling.Color.ORANGE, true) +
+                            ConsoleStyling.color(" created successfully", ConsoleStyling.Color.GREEN, true));
+
             } catch (IOException e) {
                 System.err.println("Failed to create directory: " + e.getMessage());
             }
@@ -230,107 +227,129 @@ public class ExerciseTemplateCreator extends Application{
         }
         //endregion
 
-        //region Create AppClass
+        //region Create Main class
         try {
-            Files.createFile(Paths.get(directory + File.separator + "App.java"));
-            System.out.println("App Class created successfully.");
+            Files.createFile(Paths.get(mainPath + File.separator + "Main.java"));
+            System.out.println(
+                            ConsoleStyling.color("File: ", ConsoleStyling.Color.GREEN, true) +
+                            ConsoleStyling.color("Main.java", ConsoleStyling.Color.ORANGE, true) +
+                            ConsoleStyling.color(" created successfully", ConsoleStyling.Color.GREEN, true));
         } catch (IOException e) {
             System.err.println("Failed to create file: " + e.getMessage());
         }
 
         try {
-            // Create a FileWriter object
-            FileWriter writer = new FileWriter(directory + File.separator + "App.java");
-            // Write content to the file
+            FileWriter writer = new FileWriter(mainPath + File.separator + "Main.java");
             writer.write("package " + pkgName + ";\n\n");
-            writer.write("public class App {\n");
-            writer.write("    public static void main(String[] args) {\n");
-            writer.write("        new Exercises().dispatch();");
-            writer.write("    }\n");
+            writer.write("public class Main {\n");
+            writer.write("\tpublic static void main(String[] args) {\n");
+            writer.write("\t}\n");
             writer.write("}\n");
-            // Close the FileWriter
             writer.close();
 
-            System.out.println("Content written to App.java successfully.");
+            System.out.println(
+                            ConsoleStyling.color("Content written to: ", ConsoleStyling.Color.GREEN, true) +
+                            ConsoleStyling.color("Main.java", ConsoleStyling.Color.ORANGE, true) +
+                            ConsoleStyling.color(" successfully", ConsoleStyling.Color.GREEN, true));
         } catch (IOException e) {
             System.err.println("Failed to write to the file: " + e.getMessage());
         }
         //endregion
 
-        //region Create ExerciseClass
-        try {
-            Files.createFile(Paths.get(directory + File.separator + "Exercises.java"));
-            System.out.println("Exercises Class created successfully.");
-        } catch (IOException e) {
-            System.err.println("Failed to create file: " + e.getMessage());
-        }
+        //region Create Exercise Directories & Files
+        int count = 1;
+        String ex;
 
-        try {
-            // Create a FileWriter object
-            FileWriter writer = new FileWriter(directory + File.separator + "Exercises.java");
-            // Write content to the file
-            writer.write("package " + pkgName + ";\n\n");
-            writer.write("public class App {\n");
-            // Close the FileWriter
-            writer.close();
-            System.out.println("Content written to Exercises.java successfully.");
-        } catch (IOException e) {
-            System.err.println("Failed to write to the file: " + e.getMessage());
+        for(String[] exercises : exerciseDescriptions){
+            ex = "Exercise" + count;
+
+            Path dirPath = Paths.get("src" + File.separator + "PRO" + File.separator + pkgName + File.separator + ex);
+            createDir(dirPath);
+
+            Path filePath = Paths.get(dirPath + File.separator + ex + ".java");
+            createFile(filePath);
+
+            writeExerciseToFile(filePath, "PRO." + pkgName + "." + ex, ex, count);
+
+
+            count++;
         }
         //endregion
-        printExercises(pkgName);
+
+        System.out.println(ConsoleStyling.color("Lesson Package Sucessfully Created!", ConsoleStyling.Color.WHITE, true));
         Platform.exit();
-
     }
-    public static void printExercises(String pkgName){
 
-        String directoryPath = "src" + File.separator + "PRO" + File.separator + pkgName;
-
+    private static void writeExerciseToFile(Path path, String pkg, String ex, int exNr){
         try{
-            FileWriter writer = new FileWriter(directoryPath + File.separator + "Exercises.java");
-            int count = 1;
+            FileWriter writer = new FileWriter(path.toString());
 
             // Write Class Header
-            writer.write("package " + pkgName + ";\n");
-            writer.write("public class Exercises implements Dispatchable {\n");
+            writer.write("package " + pkg + ";\n");
+            writer.write("public class " + ex + "{\n");
 
-            //for each exercise
-            for(String[] exercises : exerciseDescriptions){
 
-                // Create Top of Box
-                String exerciseTitle = "Exercise " + count;
-                writer.write("/*\n");
-                writer.write("    ┌" + "─".repeat(100 + 4 + 4) + "┐\n");
-                writer.write("    │" + " ".repeat(100 + 4 + 4) + "│\n");
-                writer.write("    │    " + exerciseTitle + " ".repeat(100 - exerciseTitle.length()) + "    │\n");
-                writer.write("    │" + " ".repeat(100 + 4 + 4) + "│\n");
+            // Create Top of Box
+            String exerciseTitle = "Exercise " + exNr;
+            writer.write("/*\n");
+            writer.write("    ┌" + "─".repeat(100 + 4 + 4) + "┐\n");
+            writer.write("    │" + " ".repeat(100 + 4 + 4) + "│\n");
+            writer.write("    │    " + exerciseTitle + " ".repeat(100 - exerciseTitle.length()) + "    │\n");
+            writer.write("    │" + " ".repeat(100 + 4 + 4) + "│\n");
 
-                // Write each line of text
-                for(String s : exercises){
-                    writer.write("    │    " + s + " ".repeat(100 - s.length()) + "    │" + "\n");
-                }
-
-                // Create Bottom of box
-                writer.write("    │" + " ".repeat(100 + 4 + 4) + "│\n");
-                writer.write("    └" + "─".repeat(100 + 4 + 4) + "┘\n");
-                writer.write("*/\n");
-                writer.write("\n"); //writer.write("    //region Exercise " + count + "\n");
-                writer.write("    public static void printExercise" + count + "(){\n");
-                writer.write("\n");
-                writer.write("    }\n");
-                //writer.write("    //endregion\n");
-                writer.write("\n\n\n");
-                count++;
+            // Write each line of text
+            for(String s : exerciseDescriptions.get(exNr - 1)){
+                writer.write("    │    " + s + " ".repeat(100 - s.length()) + "    │" + "\n");
             }
+
+            // Create Bottom of box
+            writer.write("    │" + " ".repeat(100 + 4 + 4) + "│\n");
+            writer.write("    └" + "─".repeat(100 + 4 + 4) + "┘\n");
+            writer.write("*/\n");
+            writer.write("\n");
+            writer.write("    public static void print(){\n");
+            writer.write("\n");
+            writer.write("    }\n");
+            writer.write("\n\n\n");
+
 
             // Write class footer, and close the writer
             writer.write("}\n");
             writer.close();
-            System.out.println(ConsoleStyling.color("Content of each exercise written to Exercises.java successfully.", ConsoleStyling.Color.GREEN, true));
+            System.out.println(
+                        ConsoleStyling.color("Content written to: ", ConsoleStyling.Color.GREEN, true) +
+                        ConsoleStyling.color(path.getFileName().toString(), ConsoleStyling.Color.ORANGE, true) +
+                        ConsoleStyling.color(" successfully", ConsoleStyling.Color.GREEN, true));
         }
         catch (IOException e){
             System.err.println("Failed to write to the file: " + e.getMessage());
         }
     }
-
+    private static void createFile(Path path){
+        try {
+            Files.createFile(path);
+            System.out.println(
+                        ConsoleStyling.color("File: ", ConsoleStyling.Color.GREEN, true) +
+                        ConsoleStyling.color(path.getFileName().toString(), ConsoleStyling.Color.ORANGE, true) +
+                        ConsoleStyling.color(" created successfully", ConsoleStyling.Color.GREEN, true));
+        } catch (IOException e) {
+            System.err.println("Failed to create file: " + e.getMessage());
+        }
+    }
+    private static void createDir(Path path){
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectory(path);
+                System.out.println(
+                            ConsoleStyling.color("Directory: ", ConsoleStyling.Color.GREEN, true) +
+                            ConsoleStyling.color(path.getFileName().toString(), ConsoleStyling.Color.ORANGE, true) +
+                            ConsoleStyling.color(" created successfully", ConsoleStyling.Color.GREEN, true));
+            } catch (IOException e) {
+                System.err.println("Failed to create directory: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Directory already exists.");
+        }
+    }
+    //endregion
 }

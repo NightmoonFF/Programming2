@@ -54,7 +54,7 @@ public class Daycare {
         // Only one child – no discount – you have to pay full price.
         if (small+big == 1) {
             if(small == 1) { return smallCost; }
-            if(big == 1) { return bigCost; }
+            else { return bigCost; }
         }
 
         // Rule 2
