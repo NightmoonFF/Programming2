@@ -272,7 +272,6 @@ public class Exercises {
         System.out.println("GCD(920, 1600):\t" + Exercises.greatestCommonDivisor(920, 1600));
     }
 
-
     /**
      * Exercise 7
      * A domino block is sized 2*1. An n-strip is a board sized 2*n. Make a method that calculates
@@ -280,10 +279,26 @@ public class Exercises {
      * Hint: First you must find the recursive formula for the function
      * f(n) = number of ways an n-strip can be covered with domino blocks.
      */
-    public static void findPossibleDominoCoverage(int a, int b){
+    public static int findPossibleDominoCoverage(int n){
+        /*
+        f(n) = f(n-1) + f(n-2)
+        to cover a 2*n strip, you can add a vertical domino to a 2x(n-1) strip,
+        or add two horizontal dominos to a 2*(n-2) strip
 
-        // f(n) =
+        The strip is thought of like a row of vertical dominos. Slots to put them in.
+        If there are two in a row, they can also be horizontal.
+        */
 
+        /*
+         * Base cases:
+         *  f(1) = 1 - One option:  1 vertical
+         *  f(2) = 2 - Two options: 2 horizontal or 2 vertical
+         */
+        if(n == 2) { return 2; }
+        if(n == 1) { return 1; }
+
+        // f(n) = f(n-1) + f(n-2)
+        return findPossibleDominoCoverage(n - 1) + findPossibleDominoCoverage(n -2);
 
     }
 

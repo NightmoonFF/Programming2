@@ -5,7 +5,7 @@ import Utility.Styling;
 public class main {
     public static void main(String[] args) {
 
-        int printExercise = 1;
+        int printExercise = 7;
 
         switch (printExercise) {
             case 1:
@@ -32,6 +32,9 @@ public class main {
                 System.out.println(Styling.txtOrange(Styling.underline("\nExercise 6 \n")));
                 Exercises.printExercise6();
                 break;
+            case 7:
+                System.out.println(Styling.txtOrange(Styling.underline("\nExercise 6 \n")));
+                System.out.println(Exercises.findPossibleDominoCoverage(10));
         }
     }
 }
