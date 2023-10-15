@@ -1,6 +1,6 @@
 package PRO.Lektion7_DelLosKombiner;
 
-import Utility.ConsoleStyling;
+import Utility.Styling;
 import Utility.Dispatchable;
 
 import java.util.ArrayList;
@@ -137,8 +137,8 @@ public class Exercises implements Dispatchable {
         }
         System.out.println();
         System.out.println(
-                ConsoleStyling.color("Total: ", ConsoleStyling.Color.WHITE, true) +
-                ConsoleStyling.color(String.valueOf(returnTotal(elements)), ConsoleStyling.Color.GREEN, true));
+                Styling.color("Total: ", Styling.Color.WHITE, true) +
+                Styling.color(String.valueOf(returnTotal(elements)), Styling.Color.GREEN, true));
     }
     //endregion
 
@@ -179,14 +179,14 @@ public class Exercises implements Dispatchable {
         }
         System.out.println();
         System.out.print(
-                ConsoleStyling.color(
+                Styling.color(
                         "Number of 0's: ",
-                        ConsoleStyling.Color.WHITE,
+                        Styling.Color.WHITE,
                         true));
         System.out.println(
-                ConsoleStyling.color(
+                Styling.color(
                         String.valueOf(countZero(elements)),
-                        ConsoleStyling.Color.GREEN,
+                        Styling.Color.GREEN,
                         true));
 
     }

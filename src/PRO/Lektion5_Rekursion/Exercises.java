@@ -1,6 +1,6 @@
 package PRO.Lektion5_Rekursion;
 
-import Utility.ConsoleStyling;
+import Utility.Styling;
 
 import java.io.File;
 import java.util.Random;
@@ -216,7 +216,7 @@ public class Exercises {
     private static void scanDirHelper(String path, int level){
         //TODO: some directories are not indented? Otherwise almost works as intended
         File root = new File(path);
-        if(level == 0) { System.out.println(ConsoleStyling.color(root.getName(), ConsoleStyling.Color.WHITE, true)); }
+        if(level == 0) { System.out.println(Styling.color(root.getName(), Styling.Color.WHITE, true)); }
 
         for(File f : root.listFiles()) {
             if (!f.isDirectory()) {
@@ -230,10 +230,10 @@ public class Exercises {
         for(File f : root.listFiles()){
             if (f.isDirectory()){
                 if(level == 0){
-                    System.out.println(ConsoleStyling.color("  ".repeat(level) + f.getName(), ConsoleStyling.Color.WHITE, true));
+                    System.out.println(Styling.color("  ".repeat(level) + f.getName(), Styling.Color.WHITE, true));
                     scanDirHelper(f.getPath(), level + 1);
                 } else{
-                    System.out.println(ConsoleStyling.color("  ".repeat(level) + f.getName(), ConsoleStyling.Color.WHITE, true));
+                    System.out.println(Styling.color("  ".repeat(level) + f.getName(), Styling.Color.WHITE, true));
                     scanDirHelper(f.getPath(), level + 1);
                 }
             }
@@ -247,12 +247,29 @@ public class Exercises {
      * divisor of two integers (both >= 2). The greatest common divisor is the largest integer that
      * divides both values (with no remainder).
      * Greatest common divisor gcd(b,a) is defined by:
-     *      gcd(a, b) = b if b <= a and b divides a
-     *      gcd(a, b) = gcd(b, a) if a < b
-     *      gcd(a, b) = gcd(b, a % b) otherwise
+     * gcd(a, b) = b if b <= a and b divides a
+     * gcd(a, b) = gcd(b, a) if a < b
+     * gcd(a, b) = gcd(b, a % b) otherwise
+     *
+     * @return gcd(a, b)
      */
-    public static void PrintExercise6(){
-        //TODO:
+    public static int greatestCommonDivisor(int a, int b){
+
+        // gcd(a, b) = b if b <= a and b divides a
+        if(b <= a && a % b == 0) { return b; }
+
+        // gcd(a, b) = gcd(b, a) if a < b
+        if(a < b) {
+            greatestCommonDivisor(b, a);
+        }
+
+        // gcd(a, b) = gcd(b, a % b) otherwise
+        return greatestCommonDivisor(b, a % b);
+    }
+    public static void printExercise6(){
+        System.out.println("GCD(210, 45):\t" + Exercises.greatestCommonDivisor(210, 45));
+        System.out.println("GCD(50, 20):\t" + Exercises.greatestCommonDivisor(50, 20));
+        System.out.println("GCD(920, 1600):\t" + Exercises.greatestCommonDivisor(920, 1600));
     }
 
 
@@ -263,8 +280,11 @@ public class Exercises {
      * Hint: First you must find the recursive formula for the function
      * f(n) = number of ways an n-strip can be covered with domino blocks.
      */
-    public static void PrintExercise7(){
-        //TODO:
+    public static void findPossibleDominoCoverage(int a, int b){
+
+        // f(n) =
+
+
     }
 
 }

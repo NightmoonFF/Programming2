@@ -1,6 +1,6 @@
 package PRO.Lektion3_Interfaces.Opgave1;
 
-import Utility.ConsoleStyling;
+import Utility.Styling;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,22 +11,22 @@ public class App {
 
         // Average Scoville
         double tempAverage = average(spicyStuff.toArray(new Measurable[0]));
-        System.out.println(ConsoleStyling.color("Average Scoville: ", "#FFFF00", true) + ConsoleStyling.color(Double.toString(tempAverage), "#FFFFFF", false));
+        System.out.println(Styling.color("Average Scoville: ", "#FFFF00", true) + Styling.color(Double.toString(tempAverage), "#FFFFFF", false));
 
         // Spiciest Chilli
         Measurable tempMax = max(spicyStuff.toArray(new Measurable[0]));
-        System.out.println(ConsoleStyling.color("Spiciest Chilli: ", "FFFF00", true) + ConsoleStyling.color(Double.toString(tempMax.getMeasure()), "FFFFFF", false) + " (" + tempMax.getName() + ")");
+        System.out.println(Styling.color("Spiciest Chilli: ", "FFFF00", true) + Styling.color(Double.toString(tempMax.getMeasure()), "FFFFFF", false) + " (" + tempMax.getName() + ")");
 
         // Black Friday Meal
         Measurable[] tempFridayMeal = blackFridayMeal(spicyStuff.toArray(new Measurable[0]), beers.toArray(new Measurable[0]));
-        System.out.print(ConsoleStyling.color("Black Friday Meal: ", "FFFF00", true));
+        System.out.print(Styling.color("Black Friday Meal: ", "FFFF00", true));
         for(int i = 0; i < tempFridayMeal.length; i++){
             boolean isLastEntry = (i == tempFridayMeal.length - 1);
             String entry = tempFridayMeal[i].getName();
-            System.out.print(ConsoleStyling.color(entry, "#00FF00", false));
+            System.out.print(Styling.color(entry, "#00FF00", false));
 
             if(!isLastEntry){
-                System.out.print(ConsoleStyling.color(", ", "#FFFFFF", false));
+                System.out.print(Styling.color(", ", "#FFFFFF", false));
 
             }
             else{ System.out.println(); }
@@ -34,7 +34,7 @@ public class App {
 
         // Filtered Average Scoville
         double tempAverageFiltered = average(spicyStuff.toArray(new Measurable[0]), new ChilliFilter());
-        System.out.println(ConsoleStyling.color("Average Scoville", "#FFFF00", true) + " (filtered): " + ConsoleStyling.color(Double.toString(tempAverageFiltered), "#FFFFFF", false));
+        System.out.println(Styling.color("Average Scoville", "#FFFF00", true) + " (filtered): " + Styling.color(Double.toString(tempAverageFiltered), "#FFFFFF", false));
 
 
 

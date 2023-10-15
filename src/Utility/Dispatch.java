@@ -42,12 +42,12 @@ public class Dispatch {
      * they want to execute
      */
     private static void userPrompt() {
-        System.out.print(ConsoleStyling.color("-".repeat(50), ConsoleStyling.Color.WHITE, true));
+        System.out.print(Styling.color("-".repeat(50), Styling.Color.WHITE, true));
         System.out.println();
         for (int i = 1; i < tableSize; i++) {
             System.out.println(
-                    ConsoleStyling.color("[" + i + "] ", ConsoleStyling.Color.GREEN, true) +
-                            ConsoleStyling.color(table[i].getTaskName(), ConsoleStyling.Color.WHITE, false)
+                    Styling.color("[" + i + "] ", Styling.Color.GREEN, true) +
+                            Styling.color(table[i].getTaskName(), Styling.Color.WHITE, false)
             );
         }
 
@@ -60,7 +60,7 @@ public class Dispatch {
                 if(choice > 0 && choice <= table.length - 1){
                     // Valid index
                     dispatchTableEntry(choice);
-                    System.out.print(ConsoleStyling.color("-".repeat(50), ConsoleStyling.Color.WHITE, true));
+                    System.out.print(Styling.color("-".repeat(50), Styling.Color.WHITE, true));
                     System.out.println();
                     promptContinue();
                     break;
@@ -68,14 +68,14 @@ public class Dispatch {
                 else{
                     // Invalid if index out of bounds
                     System.out.println();
-                    System.out.println(ConsoleStyling.color("Invalid Input!", ConsoleStyling.Color.ORANGE, true));
+                    System.out.println(Styling.color("Invalid Input!", Styling.Color.ORANGE, true));
                     scanner.next();
                 }
             }
             else{
                 // Invalid if not an integer
                 System.out.println();
-                System.out.println(ConsoleStyling.color("Invalid Input!", ConsoleStyling.Color.ORANGE, true));
+                System.out.println(Styling.color("Invalid Input!", Styling.Color.ORANGE, true));
                 scanner.next();
             }
         }
@@ -99,7 +99,7 @@ public class Dispatch {
                 else{
                     // Invaild input
                     System.out.println();
-                    System.out.println(ConsoleStyling.color("Invalid Input!", ConsoleStyling.Color.ORANGE, true));
+                    System.out.println(Styling.color("Invalid Input!", Styling.Color.ORANGE, true));
                     scanner.next();
                 }
             }
@@ -110,7 +110,7 @@ public class Dispatch {
      * Exits the Application
      */
     private static void exit(){
-        System.out.println(ConsoleStyling.color("Terminating Application...", ConsoleStyling.Color.ORANGE, true));
+        System.out.println(Styling.color("Terminating Application...", Styling.Color.ORANGE, true));
         System.exit(0);
     }
 

@@ -1,5 +1,5 @@
 package PRO.Lektion3_Interfaces.Opgave3;
-import Utility.ConsoleStyling;
+import Utility.Styling;
 import Utility.MathUtil;
 
 import java.util.*;
@@ -46,11 +46,11 @@ public class App {
         ArrayList<Product> itemsToPrint = new ArrayList<Product>();
         Collections.shuffle(itemsToPrint);
 
-        System.out.println(ConsoleStyling.color("WALKMART", ConsoleStyling.Color.ORANGE, true));
+        System.out.println(Styling.color("WALKMART", Styling.Color.ORANGE, true));
         System.out.println("Addr: Fisherstreet 51, 23-10");
         System.out.println("Tlf: 69 96 96 69");
         System.out.println("****************");
-        System.out.println( ConsoleStyling.color("CASH RECIEPT", ConsoleStyling.Color.WHITE, true));
+        System.out.println( Styling.color("CASH RECIEPT", Styling.Color.WHITE, true));
         System.out.println("****************");
 
         double totalPrice = 0;
@@ -59,7 +59,7 @@ public class App {
 
             //15 spaces no matter what
 
-            System.out.print( ConsoleStyling.bold(product.name) );
+            System.out.print( Styling.bold(product.name) );
 
             int remainingChars = 20 - product.name.length();
             for(int i = 0; i < remainingChars; i++) {
@@ -77,17 +77,17 @@ public class App {
                 + product.getSalesTaxPercent()
                 + "% Tax"
                 + " ("
-                + ConsoleStyling.italic(String.format("%.2f", (product.getSalesTaxPercent() / 100) * product.price) + "kr") //String.format("%.2f", value) formats the double value value with two decimal places (.2f)
+                + Styling.italic(String.format("%.2f", (product.getSalesTaxPercent() / 100) * product.price) + "kr") //String.format("%.2f", value) formats the double value value with two decimal places (.2f)
                 + ")" );
             System.out.println();
-            System.out.println(ConsoleStyling.italic("-" + product.description));
+            System.out.println(Styling.italic("-" + product.description));
             System.out.println();
             }
 
         // Print Total
         System.out.println("****************");
-        System.out.print(ConsoleStyling.color("TOTAL:         ", ConsoleStyling.Color.WHITE, true));
-        System.out.print( ConsoleStyling.color(String.valueOf(MathUtil.roundToNearestHalfOrWhole(totalPrice)), ConsoleStyling.Color.WHITE, true) );
+        System.out.print(Styling.color("TOTAL:         ", Styling.Color.WHITE, true));
+        System.out.print( Styling.color(String.valueOf(MathUtil.roundToNearestHalfOrWhole(totalPrice)), Styling.Color.WHITE, true) );
         System.out.println();
 
 

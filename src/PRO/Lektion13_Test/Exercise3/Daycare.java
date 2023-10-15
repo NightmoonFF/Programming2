@@ -53,14 +53,13 @@ public class Daycare {
         // Rule 1
         // Only one child – no discount – you have to pay full price.
         if (small+big == 1) {
-            if(small == 1) { return smallCost; }
-            else { return bigCost; }
+            return small == 1 ? smallCost: bigCost;
         }
 
         // Rule 2
         // If there are 2 or 3 children, you pay full price for the most expensive child, while you
         // get a discount of 25% for the rest.
-        else if (small + big <= 3) {
+        if (small + big <= 3) {
 
             // first child is full price
             if(small > 0) { totalCost += smallCost; remainingSmall--; }
@@ -73,34 +72,34 @@ public class Daycare {
             for(int i = 0; i < remainingBig; i++){
                 totalCost += MathUtil.percentageReduction(25, bigCost);
             }
+            return totalCost;
         }
 
         // Rule 3
         // If there are more than 3 children, use the above model for the first 3 children.
         // For the fourth, fifth (and so on) child you get a discount of 50%
-        else if (small + big > 3){
 
-            //there is no way to determine what child category the first two discounts are applied to?
-            //if there is 5 children, and we apply 25% discount to first 2, what determines if it is to a small or big child?
-            //task only says "first", so what comes first when its just two integers?
-            //I am going to infer that the 25% discount will be applied to the most costly (small) child, if possible.
-            if(small > 0) { totalCost += smallCost; remainingSmall--; }
-            else { totalCost += bigCost; remainingBig--; }
+        /*there is no way to determine what child category the first two discounts are applied to?
+        if there is 5 children, and we apply 25% discount to first 2, what determines if it is to a small or big child?
+        task only says "first", so what comes first when its just two integers?
+        I am going to infer that the 25% discount will be applied to the most costly (small) child, if possible.*/
+        if(small > 0) { totalCost += smallCost; remainingSmall--; }
+        else { totalCost += bigCost; remainingBig--; }
 
-            int rule2count = 0;
-            int discountPct = 25;
+        int rule2count = 0;
+        int discountPct = 25;
 
-            for(int i = 0; i < remainingSmall; i++){
-                if(rule2count >= 2) { discountPct = 50; }
-                totalCost += MathUtil.percentageReduction(discountPct, smallCost);
-                rule2count++;
-            }
-            for(int i = 0; i < remainingBig; i++){
-                if(rule2count >= 2) { discountPct = 50; }
-                totalCost += MathUtil.percentageReduction(discountPct, bigCost);
-                rule2count++;
-            }
+        for(int i = 0; i < remainingSmall; i++){
+            if(rule2count >= 2) { discountPct = 50; }
+            totalCost += MathUtil.percentageReduction(discountPct, smallCost);
+            rule2count++;
         }
+        for(int i = 0; i < remainingBig; i++){
+            if(rule2count >= 2) { discountPct = 50; }
+            totalCost += MathUtil.percentageReduction(discountPct, bigCost);
+            rule2count++;
+        }
+
 
         return totalCost;
     }

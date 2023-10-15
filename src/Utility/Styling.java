@@ -1,10 +1,8 @@
 package Utility;
 
-import java.awt.*;
+import static Utility.Styling.Color.*;
 
-import static Utility.ConsoleStyling.Color.*;
-
-public abstract class ConsoleStyling {
+public abstract class Styling {
 
     public enum Color{
         RED,
@@ -19,20 +17,24 @@ public abstract class ConsoleStyling {
         BLACK
     }
 
-
     // Custom
     public static String title(String text) {
         String s = text;
         s = color(s, YELLOW, true);
         return s;
     }
-    public static String result(String text) {
-        String s = text;
-        s = color(s, WHITE, false);
-        s = underline(s);
+    public static String txtGreen(String s){
+        s = color(s, GREEN, true);
         return s;
     }
-
+    public static String txtOrange(String s){
+        s = color(s, ORANGE, true);
+        return s;
+    }
+    public static String txtWhite(String s){
+        s = color(s, WHITE, true);
+        return s;
+    }
 
     // Standard
     public static String color(String text, String hexColor, boolean bold) {

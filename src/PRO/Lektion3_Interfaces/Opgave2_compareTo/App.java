@@ -1,6 +1,6 @@
 package PRO.Lektion3_Interfaces.Opgave2_compareTo;
 
-import Utility.ConsoleStyling;
+import Utility.Styling;
 import java.util.ArrayList;
 
 public class App {
@@ -11,37 +11,37 @@ public class App {
         System.out.println();
 
         Customer largestCustomer = findLargest(customers.toArray(new Customer[0]));
-        System.out.println(ConsoleStyling.title("Biggest Customer Lexicographically: "));
+        System.out.println(Styling.title("Biggest Customer Lexicographically: "));
         System.out.println(largestCustomer.toString());
         System.out.println();
 
         //region Wagner
         Customer customerBig = new Customer("Wagner", "Quint", 99);
         Customer[] biggerThanWagner = biggerThanCustomer(customers.toArray(new Customer[0]), customerBig);
-        System.out.println(ConsoleStyling.title("Customers Bigger than Wagner Quint: "));
+        System.out.println(Styling.title("Customers Bigger than Wagner Quint: "));
         int wagnerCount = 0;
         for(Customer customer : biggerThanWagner){
             System.out.println(customer.toString());
             wagnerCount++;
         }
-        System.out.println(ConsoleStyling.color("Total: ", ConsoleStyling.Color.WHITE, true) + ConsoleStyling.color(Integer.toString(wagnerCount), ConsoleStyling.Color.GREEN, true));
+        System.out.println(Styling.color("Total: ", Styling.Color.WHITE, true) + Styling.color(Integer.toString(wagnerCount), Styling.Color.GREEN, true));
         String omittedCustomers = Integer.toString(customers.size() - biggerThanWagner.length);
-        System.out.println(ConsoleStyling.color("Omitted: ", ConsoleStyling.Color.WHITE, true) + ConsoleStyling.color(omittedCustomers, ConsoleStyling.Color.RED, true));
+        System.out.println(Styling.color("Omitted: ", Styling.Color.WHITE, true) + Styling.color(omittedCustomers, Styling.Color.RED, true));
         System.out.println();
         //endregion
 
         //region Arnold
         Customer customerSmall = new Customer("Arnold", "Fish", 41);
         Customer[] biggerThanArnold = biggerThanCustomer(customers.toArray(new Customer[0]), customerSmall);
-        System.out.println(ConsoleStyling.title("Customers Bigger than Arnold Fish: "));
+        System.out.println(Styling.title("Customers Bigger than Arnold Fish: "));
         int arnoldCount = 0;
         for(Customer customer : biggerThanArnold){
             System.out.println(customer.toString());
             arnoldCount++;
         }
-        System.out.println(ConsoleStyling.color("Total: ", ConsoleStyling.Color.WHITE, true) + ConsoleStyling.color(Integer.toString(arnoldCount), ConsoleStyling.Color.GREEN, true));
+        System.out.println(Styling.color("Total: ", Styling.Color.WHITE, true) + Styling.color(Integer.toString(arnoldCount), Styling.Color.GREEN, true));
         omittedCustomers = Integer.toString(customers.size() - biggerThanArnold.length);
-        System.out.println(ConsoleStyling.color("Omitted: ", ConsoleStyling.Color.WHITE, true) + ConsoleStyling.color(omittedCustomers, ConsoleStyling.Color.RED, true));
+        System.out.println(Styling.color("Omitted: ", Styling.Color.WHITE, true) + Styling.color(omittedCustomers, Styling.Color.RED, true));
         //endregion
     }
 

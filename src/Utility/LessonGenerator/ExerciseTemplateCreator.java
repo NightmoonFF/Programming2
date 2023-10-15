@@ -1,6 +1,6 @@
 package Utility.LessonGenerator;
 
-import Utility.ConsoleStyling;
+import Utility.Styling;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -212,9 +212,9 @@ public class ExerciseTemplateCreator extends Application{
             try {
                 Files.createDirectory(mainPath);
                 System.out.println(
-                            ConsoleStyling.color("Package: ", ConsoleStyling.Color.GREEN, true) +
-                            ConsoleStyling.color(pkgName, ConsoleStyling.Color.ORANGE, true) +
-                            ConsoleStyling.color(" created successfully", ConsoleStyling.Color.GREEN, true));
+                            Styling.color("Package: ", Styling.Color.GREEN, true) +
+                            Styling.color(pkgName, Styling.Color.ORANGE, true) +
+                            Styling.color(" created successfully", Styling.Color.GREEN, true));
 
             } catch (IOException e) {
                 System.err.println("Failed to create directory: " + e.getMessage());
@@ -228,26 +228,48 @@ public class ExerciseTemplateCreator extends Application{
         try {
             Files.createFile(Paths.get(mainPath + File.separator + "Main.java"));
             System.out.println(
-                            ConsoleStyling.color("File: ", ConsoleStyling.Color.GREEN, true) +
-                            ConsoleStyling.color("Main.java", ConsoleStyling.Color.ORANGE, true) +
-                            ConsoleStyling.color(" created successfully", ConsoleStyling.Color.GREEN, true));
+                            Styling.color("File: ", Styling.Color.GREEN, true) +
+                            Styling.color("Main.java", Styling.Color.ORANGE, true) +
+                            Styling.color(" created successfully", Styling.Color.GREEN, true));
         } catch (IOException e) {
             System.err.println("Failed to create file: " + e.getMessage());
         }
 
+        //Create Main Method
         try {
             FileWriter writer = new FileWriter(mainPath + File.separator + "Main.java");
-            writer.write("package " + "PRO." + pkgName + ";\n\n");
-            writer.write("public class Main {\n");
-            writer.write("\tpublic static void main(String[] args) {\n");
+            writer.write("package " + "PRO." + pkgName + ";\n");
+
+            //region Imports
+            for (int i = 1; i < exerciseDescriptions.size() + 1; i++) {
+                writer.write("\nimport PRO." + pkgName + ".Exercise" + i + ".Exercise" + i + ";");
+            }
+            writer.write("\nimport Utility.Styling;");
+
+            writer.write("\npublic class Main {");
+            writer.write("\n\tpublic static void main(String[] args) {");
+            //endregion
+
+            //region Switch
+            writer.write("\n\n\t\tint printExercise = 1;");
+            writer.write("\n\n\t\tswitch (printExercise) {");
+            for (int i = 1; i < exerciseDescriptions.size() + 1; i++) {
+                writer.write("\n\t\t\t\tcase " + i + ":");
+                writer.write("\n\t\t\t\t\tSystem.out.println(Styling.txtOrange(Styling.underline(\"\\nExercise "+ i +" \\n\")));");
+                writer.write("\n\t\t\t\t\tExercise" + i + ".print();");
+                writer.write("\n\t\t\t\t\tbreak;");
+            }
+            writer.write("\n\n\t\t}");
+            //endregion
+
             writer.write("\t}\n");
             writer.write("}\n");
             writer.close();
 
             System.out.println(
-                            ConsoleStyling.color("Content written to: ", ConsoleStyling.Color.GREEN, true) +
-                            ConsoleStyling.color("Main.java", ConsoleStyling.Color.ORANGE, true) +
-                            ConsoleStyling.color(" successfully", ConsoleStyling.Color.GREEN, true));
+                            Styling.color("Content written to: ", Styling.Color.GREEN, true) +
+                            Styling.color("Main.java", Styling.Color.ORANGE, true) +
+                            Styling.color(" successfully", Styling.Color.GREEN, true));
         } catch (IOException e) {
             System.err.println("Failed to write to the file: " + e.getMessage());
         }
@@ -272,7 +294,7 @@ public class ExerciseTemplateCreator extends Application{
         }
         //endregion
 
-        System.out.println(ConsoleStyling.color("Lesson Package Sucessfully Created!", ConsoleStyling.Color.WHITE, true));
+        System.out.println(Styling.color("Lesson Package Sucessfully Created!", Styling.Color.WHITE, true));
         Platform.exit();
     }
     private static void writeExerciseToFile(Path path, String pkg, String ex, int exNr){
@@ -312,9 +334,9 @@ public class ExerciseTemplateCreator extends Application{
             writer.write("}\n");
             writer.close();
             System.out.println(
-                        ConsoleStyling.color("Content written to: ", ConsoleStyling.Color.GREEN, true) +
-                        ConsoleStyling.color(path.getFileName().toString(), ConsoleStyling.Color.ORANGE, true) +
-                        ConsoleStyling.color(" successfully", ConsoleStyling.Color.GREEN, true));
+                        Styling.color("Content written to: ", Styling.Color.GREEN, true) +
+                        Styling.color(path.getFileName().toString(), Styling.Color.ORANGE, true) +
+                        Styling.color(" successfully", Styling.Color.GREEN, true));
         }
         catch (IOException e){
             System.err.println("Failed to write to the file: " + e.getMessage());
@@ -324,9 +346,9 @@ public class ExerciseTemplateCreator extends Application{
         try {
             Files.createFile(path);
             System.out.println(
-                        ConsoleStyling.color("File: ", ConsoleStyling.Color.GREEN, true) +
-                        ConsoleStyling.color(path.getFileName().toString(), ConsoleStyling.Color.ORANGE, true) +
-                        ConsoleStyling.color(" created successfully", ConsoleStyling.Color.GREEN, true));
+                        Styling.color("File: ", Styling.Color.GREEN, true) +
+                        Styling.color(path.getFileName().toString(), Styling.Color.ORANGE, true) +
+                        Styling.color(" created successfully", Styling.Color.GREEN, true));
         } catch (IOException e) {
             System.err.println("Failed to create file: " + e.getMessage());
         }
@@ -336,9 +358,9 @@ public class ExerciseTemplateCreator extends Application{
             try {
                 Files.createDirectory(path);
                 System.out.println(
-                            ConsoleStyling.color("Directory: ", ConsoleStyling.Color.GREEN, true) +
-                            ConsoleStyling.color(path.getFileName().toString(), ConsoleStyling.Color.ORANGE, true) +
-                            ConsoleStyling.color(" created successfully", ConsoleStyling.Color.GREEN, true));
+                            Styling.color("Directory: ", Styling.Color.GREEN, true) +
+                            Styling.color(path.getFileName().toString(), Styling.Color.ORANGE, true) +
+                            Styling.color(" created successfully", Styling.Color.GREEN, true));
             } catch (IOException e) {
                 System.err.println("Failed to create directory: " + e.getMessage());
             }

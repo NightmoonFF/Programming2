@@ -1,6 +1,6 @@
 package PRO.Lektion6_Rekursion;
 
-import Utility.ConsoleStyling;
+import Utility.Styling;
 import Utility.Dispatchable;
 import Utility.StringLists.StringList;
 
@@ -20,7 +20,7 @@ public class Assignments implements Dispatchable {
         }
         else{
             numberList.remove(i);
-            System.out.print(ConsoleStyling.color(String.valueOf(i), ConsoleStyling.Color.PINK, true) + ", ");
+            System.out.print(Styling.color(String.valueOf(i), Styling.Color.PINK, true) + ", ");
             return evenNumbersHelper(numberList, i);
         }
     }
@@ -30,7 +30,7 @@ public class Assignments implements Dispatchable {
 
         for(int number : evenNumberList){
             count++;
-            System.out.print(ConsoleStyling.color(String.valueOf(number), ConsoleStyling.Color.GREEN, true ) + ", ");
+            System.out.print(Styling.color(String.valueOf(number), Styling.Color.GREEN, true ) + ", ");
         }
 
         System.out.println();
@@ -45,9 +45,9 @@ public class Assignments implements Dispatchable {
             int randomNumber = random.nextInt(100);
             nList.add(randomNumber);
         }
-        System.out.println(ConsoleStyling.color("Opgave 1:", ConsoleStyling.Color.WHITE, true));
+        System.out.println(Styling.color("Opgave 1:", Styling.Color.WHITE, true));
         System.out.println(
-                ConsoleStyling.color("Total: ", ConsoleStyling.Color.YELLOW, true) +
+                Styling.color("Total: ", Styling.Color.YELLOW, true) +
                 evenNumbers(nList)
         );
     }
@@ -72,7 +72,7 @@ public class Assignments implements Dispatchable {
         int limit = 10;
 
         //region Header
-        System.out.println(ConsoleStyling.color("Table of K("+ limit + "," + limit + ")", ConsoleStyling.Color.YELLOW, true));
+        System.out.println(Styling.color("Table of K("+ limit + "," + limit + ")", Styling.Color.YELLOW, true));
         System.out.printf("%-4s", "m");
         for(int i = 0; i < limit; i++){
                 System.out.printf("%-7d", i);
@@ -138,14 +138,14 @@ public class Assignments implements Dispatchable {
         int count = 0;
         for (String word : wordList){
             if(isPalindrome(word)){
-                System.out.println( ConsoleStyling.color(word, ConsoleStyling.Color.GREEN, true) + " - is a palindrome!" );
+                System.out.println( Styling.color(word, Styling.Color.GREEN, true) + " - is a palindrome!" );
                 count++;
             }
         }
         System.out.println("-".repeat(50));
-        System.out.println( ConsoleStyling.color( "Result: ", ConsoleStyling.Color.WHITE, false));
-        System.out.println( ConsoleStyling.color( String.valueOf(count), ConsoleStyling.Color.GREEN, true) + " entries were palindromes!");
-        System.out.println( ConsoleStyling.color( (String.valueOf(wordList.size() - count) ), ConsoleStyling.Color.ORANGE, true) + " were not!");
+        System.out.println( Styling.color( "Result: ", Styling.Color.WHITE, false));
+        System.out.println( Styling.color( String.valueOf(count), Styling.Color.GREEN, true) + " entries were palindromes!");
+        System.out.println( Styling.color( (String.valueOf(wordList.size() - count) ), Styling.Color.ORANGE, true) + " were not!");
     }
     //endregion
 
