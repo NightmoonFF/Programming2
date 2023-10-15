@@ -84,7 +84,6 @@ public class Daycare {
             //if there is 5 children, and we apply 25% discount to first 2, what determines if it is to a small or big child?
             //task only says "first", so what comes first when its just two integers?
             //I am going to infer that the 25% discount will be applied to the most costly (small) child, if possible.
-
             if(small > 0) { totalCost += smallCost; remainingSmall--; }
             else { totalCost += bigCost; remainingBig--; }
 

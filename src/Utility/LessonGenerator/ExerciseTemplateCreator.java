@@ -8,12 +8,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.Console;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -119,7 +116,7 @@ public class ExerciseTemplateCreator extends Application{
         //region Create Button
         Button btnConfirm = new Button("Confirm");
         btnConfirm.setPrefSize(150, 50);
-        btnConfirm.setOnAction(e -> createPackages(txfPackageName.getText()));
+        btnConfirm.setOnAction(e -> createLesson(txfPackageName.getText()));
         //endregion
 
         //region Create Main Vbox
@@ -203,7 +200,7 @@ public class ExerciseTemplateCreator extends Application{
     //endregion
 
     //region File Creation
-    public static void createPackages(String pkgName){
+    public static void createLesson(String pkgName){
 
         saveExerciseToArray();
 
@@ -240,7 +237,7 @@ public class ExerciseTemplateCreator extends Application{
 
         try {
             FileWriter writer = new FileWriter(mainPath + File.separator + "Main.java");
-            writer.write("package " + pkgName + ";\n\n");
+            writer.write("package " + "PRO." + pkgName + ";\n\n");
             writer.write("public class Main {\n");
             writer.write("\tpublic static void main(String[] args) {\n");
             writer.write("\t}\n");
@@ -271,7 +268,6 @@ public class ExerciseTemplateCreator extends Application{
 
             writeExerciseToFile(filePath, "PRO." + pkgName + "." + ex, ex, count);
 
-
             count++;
         }
         //endregion
@@ -279,7 +275,6 @@ public class ExerciseTemplateCreator extends Application{
         System.out.println(ConsoleStyling.color("Lesson Package Sucessfully Created!", ConsoleStyling.Color.WHITE, true));
         Platform.exit();
     }
-
     private static void writeExerciseToFile(Path path, String pkg, String ex, int exNr){
         try{
             FileWriter writer = new FileWriter(path.toString());
