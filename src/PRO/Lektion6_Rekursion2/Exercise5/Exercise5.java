@@ -1,4 +1,8 @@
 package PRO.Lektion6_Rekursion2.Exercise5;
+
+import javax.sound.midi.Soundbank;
+import java.util.Objects;
+
 public class Exercise5{
 /*
     ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -30,10 +34,34 @@ public class Exercise5{
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
-    public static void print(){
+    public static void printAnagrams(String prefix, String word){
 
+        if(word.length() <= 1){
+
+            // when letters from word has been moved over to prefix so that only one is left,
+            // print the prefix, then the remaining letter (word, which contains 1 left)
+            System.out.println(Utility.Styling.txtOrange(prefix) + word);
+        }
+        else{
+
+            // Iterate over each letter in the word
+            for (int i = 0; i < word.length(); i++) {
+
+                // the active letter, such as "c" in the first iteration of cat.
+                // the next root-level iteration (after recursions with c) would be "a", then "t"
+                String activeLetter = word.substring(i, i + 1);
+
+                // the remaining letters, after the active letter has been excluded
+                String remainingLetters = word.substring(0, i) + word.substring(i + 1);
+
+                // find anagrams for the remaining letters.
+                // moves the active letter from word over to prefix
+                printAnagrams(prefix + activeLetter, remainingLetters);
+            }
+        }
     }
 
-
-
+    public static void print(){
+        printAnagrams("", "cat");
+    }
 }
