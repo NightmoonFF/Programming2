@@ -1,4 +1,4 @@
-package PRO.Lektion8_Generics;
+package PRO.Lektion8_Generics.Exercise1;
 
 public class Person<T extends Comparable<T>> implements Comparable<Person<T>>{
 
