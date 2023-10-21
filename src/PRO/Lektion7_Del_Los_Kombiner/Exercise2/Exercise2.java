@@ -1,7 +1,6 @@
 package PRO.Lektion7_Del_Los_Kombiner.Exercise2;
 
 import Utility.Styling;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,23 +15,29 @@ public class Exercise2{
     │                                                                                                            │
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
+
+    /**
+     * Recursion helper method
+     * Only called by countZero(ArrayList<Integer>)
+     */
     static private int countZero(ArrayList<Integer> list, int l, int h){
-
-        if(list.get(l) == 0){
-            return 1;
-        } else{
-
-            int m = (l + h) / 2;
-
-            int zeroCountA = countZero(list, l, m);
-            int ZeroCountB = countZero(list, m + 1, h);
-
-            return zeroCountA + ZeroCountB;
-
-
+        if (l > h) {
+            return 0;
         }
+
+        int m = (l + h) / 2;
+
+        // Recursive calls on left and right halves
+        int zeroCountA = countZero(list, l, m - 1);
+        int zeroCountB = countZero(list, m + 1, h);
+
+        // Check the current index and add 1 if it's zero
+        int currentCount = (list.get(m) == 0) ? 1 : 0;
+
+        // Combine the results and return
+        return zeroCountA + zeroCountB + currentCount;
     }
-    static private int countZero(ArrayList<Integer> list){
+    static public int countZero(ArrayList<Integer> list){
         return countZero(list, 0, list.size() - 1);
     }
     static public void print(){
@@ -40,8 +45,15 @@ public class Exercise2{
         elements.add(0);
         for(int i = 0; i < 15; i++){
             elements.add(new Random().nextInt(0, 5));
-            System.out.print(elements.get(i) + " ");
+
+            if(elements.get(i) == 0){
+                System.out.print(Utility.Styling.txtWhite(elements.get(i).toString()) + " ");
+            }
+            else{
+                System.out.print(elements.get(i) + " ");
+            }
         }
+
         System.out.println();
         System.out.print(
                 Styling.color(
@@ -53,10 +65,6 @@ public class Exercise2{
                         String.valueOf(countZero(elements)),
                         Styling.Color.GREEN,
                         true));
-
     }
-
-
-
 
 }

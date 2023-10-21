@@ -12,7 +12,7 @@ import Utility.Styling;
 public class Main {
 	public static void main(String[] args) {
 
-		int printExercise = 6;
+		int printExercise = 5;
 
 		switch (printExercise) {
 				case 1:

@@ -40,7 +40,7 @@ public class Exercise5{
 
             // when letters from word has been moved over to prefix so that only one is left,
             // print the prefix, then the remaining letter (word, which contains 1 left)
-            System.out.println(Utility.Styling.txtOrange(prefix) + word);
+            System.out.println(prefix + word);
         }
         else{
 
@@ -62,6 +62,6 @@ public class Exercise5{
     }
 
     public static void print(){
-        printAnagrams("", "cat");
+        printAnagrams("", "anna");
     }
 }
