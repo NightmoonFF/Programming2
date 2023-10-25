@@ -27,39 +27,40 @@ public class Exercise3 {
         }
     }
 
-    private static void merge(ArrayList<Integer> list, int low, int middle, int high) {
+    public static void merge(ArrayList<Integer> list, int low, int middle, int high) {
         ArrayList<Integer> temp = new ArrayList<>();
 
-        int leftIndex = startIndex;
-        int rightIndex = midIndex+1;
+        // Index for the left sublist
+        int leftIndex = low;
+        // Index for the right sublist
+        int rightIndex = middle + 1;
 
-        while(leftIndex<=midIndex && rightIndex<=endIndex){
-            if(inputArray.get(leftIndex)<=inputArray.get(rightIndex)){
-                mergedSortedArray.add(inputArray.get(leftIndex));
+        // Merge the two sublists into the temporary list
+        while (leftIndex <= middle && rightIndex <= high) {
+            if (list.get(leftIndex) <= list.get(rightIndex)) {
+                temp.add(list.get(leftIndex));
                 leftIndex++;
-            }else{
-                mergedSortedArray.add(inputArray.get(rightIndex));
+            } else {
+                temp.add(list.get(rightIndex));
                 rightIndex++;
             }
         }
 
-        //Either of below while loop will execute
-        while(leftIndex<=midIndex){
-            mergedSortedArray.add(inputArray.get(leftIndex));
+        // Copy the remaining elements from the left sublist, if any
+        while (leftIndex <= middle) {
+            temp.add(list.get(leftIndex));
             leftIndex++;
         }
 
-        while(rightIndex<=endIndex){
-            mergedSortedArray.add(inputArray.get(rightIndex));
+        // Copy the remaining elements from the right sublist, if any
+        while (rightIndex <= high) {
+            temp.add(list.get(rightIndex));
             rightIndex++;
         }
 
-        int i = 0;
-        int j = startIndex;
-        //Setting sorted array to original one
-        while(i<mergedSortedArray.size()){
-            inputArray.set(j, mergedSortedArray.get(i++));
-            j++;
+        // Copy the merged elements back to the original list
+        for (int i = 0; i < temp.size(); i++) {
+            list.set(low + i, temp.get(i));
         }
 
     }
