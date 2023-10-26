@@ -1,5 +1,6 @@
 package PRO.Lektion11_StrategyPattern.Exercise1;
-public class Exercise1{
+
+public class Exercise1 {
 /*
     ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
     │                                                                                                            │
@@ -32,10 +33,8 @@ public class Exercise1{
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
-    public static void print(){
+    public static void print() {
 
     }
-
-
 
 }

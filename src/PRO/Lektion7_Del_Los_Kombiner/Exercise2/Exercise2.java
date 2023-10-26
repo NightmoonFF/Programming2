@@ -1,10 +1,11 @@
 package PRO.Lektion7_Del_Los_Kombiner.Exercise2;
 
 import Utility.Styling;
+
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Exercise2{
+public class Exercise2 {
 /*
     ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
     │                                                                                                            │
@@ -20,7 +21,8 @@ public class Exercise2{
      * Recursion helper method
      * Only called by countZero(ArrayList<Integer>)
      */
-    static private int countZero(ArrayList<Integer> list, int l, int h){
+    static private int countZero(ArrayList<Integer> list, int l, int h) {
+
         if (l > h) {
             return 0;
         }
@@ -37,34 +39,30 @@ public class Exercise2{
         // Combine the results and return
         return zeroCountA + zeroCountB + currentCount;
     }
-    static public int countZero(ArrayList<Integer> list){
+
+    static public int countZero(ArrayList<Integer> list) {
+
         return countZero(list, 0, list.size() - 1);
     }
-    static public void print(){
+
+    static public void print() {
+
         ArrayList<Integer> elements = new ArrayList<>();
         elements.add(0);
-        for(int i = 0; i < 15; i++){
+        for (int i = 0; i < 15; i++) {
             elements.add(new Random().nextInt(0, 5));
 
-            if(elements.get(i) == 0){
+            if (elements.get(i) == 0) {
                 System.out.print(Utility.Styling.txtWhite(elements.get(i).toString()) + " ");
             }
-            else{
+            else {
                 System.out.print(elements.get(i) + " ");
             }
         }
 
         System.out.println();
-        System.out.print(
-                Styling.color(
-                        "Number of 0's: ",
-                        Styling.Color.WHITE,
-                        true));
-        System.out.println(
-                Styling.color(
-                        String.valueOf(countZero(elements)),
-                        Styling.Color.GREEN,
-                        true));
+        System.out.print(Styling.color("Number of 0's: ", Styling.Color.WHITE, true));
+        System.out.println(Styling.color(String.valueOf(countZero(elements)), Styling.Color.GREEN, true));
     }
 
 }
