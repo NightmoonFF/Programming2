@@ -13,4 +13,7 @@ package PRO.Lektion8_Generics.Exercise3;
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 public class Exercise3 {
+    public static void print(){
+        
+    }
 }

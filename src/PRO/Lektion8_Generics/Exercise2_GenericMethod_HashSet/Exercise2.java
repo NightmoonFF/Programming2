@@ -45,6 +45,7 @@ public class Exercise2 {
         printHashSet(stringSetB);
         exA();
         exB();
+        exC();
     }
 
     private static void exA() {
@@ -62,6 +63,13 @@ public class Exercise2 {
         System.out.println(Styling.txtWhite("\nExercise B: Difference"));
         printHashSet(hashSetDifference(intSetA, intSetB));
         printHashSet(hashSetDifference(stringSetA, stringSetB));
+    }
+
+    //TODO: this seems too simple to be the intended task
+    private static void exC(){
+        HashSet<String> stringSetC = new HashSet<>(Arrays.asList("Dorian", "Grapefruit"));
+        System.out.println(Styling.txtWhite("\nExercise C: Merge?"));
+        printHashSet(hashSetMerge(stringSetA, stringSetB, stringSetC));
     }
 
     private static <T, E> HashSet<T> hashSetUnion(HashSet<E> setA, HashSet<E> setB) {
@@ -85,6 +93,15 @@ public class Exercise2 {
         HashSet<T> resultSet = new HashSet<>(setA.size() + setB.size());
         resultSet.addAll((HashSet<T>) setA);
         resultSet.removeAll((HashSet<T>) setB);
+        return resultSet;
+    }
+
+    private static <T, E> HashSet<T> hashSetMerge(HashSet<E> setA, HashSet<E> setB, HashSet<E> setC) {
+
+        HashSet<T> resultSet = new HashSet<>();
+        resultSet.addAll((HashSet<T>) setC);
+        resultSet.addAll((HashSet<T>) setA);
+        resultSet.addAll((HashSet<T>) setB);
         return resultSet;
     }
 
