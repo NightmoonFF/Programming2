@@ -13,7 +13,10 @@ package PRO.Lektion8_Generics.Exercise3;
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 public class Exercise3 {
-    public static void print(){
-        
+
+    public static void print() {
+
+        System.out.println("Passes all tests; but had to change size to not be final. not sure if intended");
     }
+
 }

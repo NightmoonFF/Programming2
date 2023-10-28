@@ -12,4 +12,10 @@ package PRO.Lektion8_Generics.Exercise4;
     │                                                                                                            │
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
-public class Exercise4 { }
+public class Exercise4 {
+
+    public static void print() {
+
+    }
+
+}
