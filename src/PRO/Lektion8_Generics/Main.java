@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int printExercise = 3;
+        int printExercise = 4;
 
         switch (printExercise) {
             case 1:

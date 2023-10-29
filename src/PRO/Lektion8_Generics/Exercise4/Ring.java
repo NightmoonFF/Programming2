@@ -1,4 +1,4 @@
-package ex4student;
+package PRO.Lektion8_Generics.Exercise4;
 
 /**
  * The Ring ADT is a collection of items, where all items have a successor.
