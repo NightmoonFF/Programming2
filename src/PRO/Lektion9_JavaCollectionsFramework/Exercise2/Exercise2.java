@@ -46,9 +46,11 @@ public class Exercise2 {
         college.addStudent(student3);
         college.addStudent(student4);
 
+        System.out.println("Average: ");
         System.out.println(college.calcAverage());
 
-        System.out.println(college.findStudent(2).getGrades().toString());
+        System.out.println("\nGrades for student found by ID 4:");
+        System.out.println(college.findStudent(4).getGrades().toString());
     }
 
 }

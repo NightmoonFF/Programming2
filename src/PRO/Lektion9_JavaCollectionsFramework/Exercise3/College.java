@@ -1,4 +1,4 @@
-package PRO.Lektion9_JavaCollectionsFramework.Exercise2;
+package PRO.Lektion9_JavaCollectionsFramework.Exercise3;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -7,23 +7,18 @@ import java.util.Optional;
 public class College {
 
     private final String name;
-
-//    private final List<Student> students = new ArrayList<>();
-
-//    private final LinkedHashSet<Student> students = new LinkedHashSet<>();
-
     private final LinkedHashMap<Integer, Student> students = new LinkedHashMap<>();
 
     public College(String name) { this.name = name; }
 
+    public LinkedHashMap<Integer, Student> getStudents() {
+
+        return students;
+    }
+
     public String getName() { return name; }
 
     public void addStudent(Student student) {
-
-//        if (students.contains(student)) {
-//            throw new RuntimeException("Student: " + student.toString() + " is already registered");
-//        }
-//        students.add(student);
 
         if (students.containsKey(student.getStudentNo())) {
             throw new RuntimeException("Student: " + student + " is already registered");
@@ -33,10 +28,6 @@ public class College {
 
     public void removeStudent(Student student) {
 
-//        if (!students.contains(student)) {
-//            throw new RuntimeException("Student: " + student.toString() + " is not registered");
-//        }
-//        students.remove(student);
         if (!students.containsKey(student.getStudentNo())) {
             throw new RuntimeException("Student: " + student + " is already registered");
         }
@@ -48,13 +39,6 @@ public class College {
         int count = 0;
         int total = 0;
 
-//        for (Student s : students) {
-//
-//            for (int grade : s.getGrades()) {
-//                count++;
-//                total += grade;
-//            }
-//        }
         for (Map.Entry<Integer, Student> s : students.entrySet()) {
 
             for (int grade : s.getValue().getGrades()) {
@@ -68,7 +52,6 @@ public class College {
 
     public Student findStudent(int studentNo) {
 
-//        Optional<Student> student = students.stream().filter(s -> s.getStudentNo() == studentNo).findFirst();
         Optional<Student> student = Optional.ofNullable(students.get(studentNo));
 
         if (student.isPresent()) { return student.get(); }

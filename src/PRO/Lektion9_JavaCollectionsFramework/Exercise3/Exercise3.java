@@ -1,5 +1,10 @@
 package PRO.Lektion9_JavaCollectionsFramework.Exercise3;
-public class Exercise3{
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Exercise3 {
 /*
     ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
     │                                                                                                            │
@@ -23,10 +28,38 @@ public class Exercise3{
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
-    public static void print(){
+    public static void print() {
 
+        Student student1 = new Student(1, "Ted Danson");
+        Student student2 = new Student(2, "Mark Hamil");
+        Student student3 = new Student(3, "Geronimo Cadillac");
+        Student student4 = new Student(4, "Walter White");
+        student1.addGrade(10);
+        student1.addGrade(12);
+        student2.addGrade(4);
+        student3.addGrade(10);
+        student4.addGrade(7);
+        student4.addGrade(12);
+        College college = new College("Aarhus Universitet");
+        college.addStudent(student1);
+        college.addStudent(student4);
+        college.addStudent(student3);
+        college.addStudent(student2);
+
+        List<Student> studentList = new ArrayList<>(college.getStudents().values());
+
+        System.out.println("Unsorted:");
+        System.out.println(studentList);
+
+        System.out.println("\nDefault sorted (compareTo):");
+        Collections.sort(studentList);
+        System.out.println(studentList);
+
+        System.out.println("\nSorted by Name using Comparator:");
+        Collections.sort(studentList, new StudentNameComparator());
+        System.out.println(studentList);
+
+        //TODO: equals() & hashCode()
     }
-
-
 
 }
