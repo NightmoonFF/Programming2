@@ -3,9 +3,10 @@ package PRO.Lektion5_Rekursion;
 import Utility.Styling;
 
 public class main {
+
     public static void main(String[] args) {
 
-        int printExercise = 7;
+        int printExercise = 5;
 
         switch (printExercise) {
             case 1:
@@ -37,4 +38,5 @@ public class main {
                 System.out.println(Exercises.findPossibleDominoCoverage(10));
         }
     }
+
 }

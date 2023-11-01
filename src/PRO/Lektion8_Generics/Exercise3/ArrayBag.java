@@ -7,7 +7,7 @@ public class ArrayBag<E> implements Bag<E> {
 
     // current number of items in the bag,
     // items are at index 0..size-1
-    //NOTE: i had to change this to not be final. Intended?
+    //TODO: //NOTE: i had to change this to not be final. Intended?
     private int size;
 
     /**
