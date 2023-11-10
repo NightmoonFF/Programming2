@@ -1,4 +1,4 @@
-package PRO.Lektion10_JCF_og_Lambda.Exercise2;
+package PRO.Lektion10_JCF_og_Lambda.Exercise4_Iterator_And_PredicateFilter;
 
 public class Runner {
 

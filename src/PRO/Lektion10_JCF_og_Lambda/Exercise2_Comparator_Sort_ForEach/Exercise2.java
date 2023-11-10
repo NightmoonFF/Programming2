@@ -1,6 +1,10 @@
-package PRO.Lektion10_JCF_og_Lambda.Exercise2;
+package PRO.Lektion10_JCF_og_Lambda.Exercise2_Comparator_Sort_ForEach;
+
+import Utility.Styling;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Exercise2 {
@@ -30,16 +34,56 @@ public class Exercise2 {
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
+    static List<Runner> runners = new ArrayList<>(
+            List.of(new Runner("Ib", 30), new Runner("Per", 50), new Runner("Ole", 27), new Runner("Ulla", 40),
+                    new Runner("Jens", 35), new Runner("Hans", 28)));
+
     public static void print() {
 
-        List<Runner> runners = new ArrayList<>(
-                List.of(new Runner("Ib", 30), new Runner("Per", 50), new Runner("Ole", 27), new Runner("Ulla", 40),
-                        new Runner("Jens", 35), new Runner("Hans", 28)));
+        ExA();
+        ExB();
+        ExC();
+        ExD();
+    }
 
-        System.out.println("Exercise A:");
+    /**
+     * Normal forEach lambda (void)
+     */
+    private static void ExA() {
+
+        System.out.println(Styling.txtWhite("Exercise A:"));
         runners.forEach(r -> System.out.println(r.toString()));
-        System.out.println("Exercise B:");
-        runners.forEach(runner -> runner.getLapTime() > 30);
+    }
+
+    /**
+     * Lambda with conditional (if statement)
+     */
+    private static void ExB() {
+
+        System.out.println(Styling.txtWhite("\nExercise B:"));
+        runners.forEach(r -> {
+            if (r.getLapTime() < 30) {
+                System.out.println(r);
+            }
+        });
+    }
+
+    /**
+     * Lambda with Comparator on Sort()
+     */
+    private static void ExC() {
+
+        System.out.println(Styling.txtWhite("\nExercise C:"));
+        Collections.sort(runners, Comparator.comparingInt(Runner::getLapTime));
+        runners.forEach(r -> System.out.println(r.toString()));
+    }
+
+    /**
+     * Consumer lambda
+     */
+    private static void ExD() {
+
+        System.out.println(Styling.txtWhite("\nExercise D:"));
     }
 
 }

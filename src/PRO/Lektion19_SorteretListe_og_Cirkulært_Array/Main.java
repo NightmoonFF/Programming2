@@ -1,18 +1,17 @@
-package PRO.Lektion10_JCF_og_Lambda;
+package PRO.Lektion19_SorteretListe_og_Cirkulært_Array;
 
-import PRO.Lektion10_JCF_og_Lambda.Exercise1.Exercise1;
-import PRO.Lektion10_JCF_og_Lambda.Exercise2_Comparator_Sort_ForEach.Exercise2;
-import PRO.Lektion10_JCF_og_Lambda.Exercise3_Iterator_List_Map.Exercise3;
-import PRO.Lektion10_JCF_og_Lambda.Exercise4_Iterator_And_PredicateFilter.Exercise4;
-import PRO.Lektion10_JCF_og_Lambda.Exercise5.Exercise5;
-import PRO.Lektion10_JCF_og_Lambda.Exercise6.Exercise6;
+import PRO.Lektion19_SorteretListe_og_Cirkulært_Array.Exercise1.Exercise1;
+import PRO.Lektion19_SorteretListe_og_Cirkulært_Array.Exercise2.Exercise2;
+import PRO.Lektion19_SorteretListe_og_Cirkulært_Array.Exercise3.Exercise3;
+import PRO.Lektion19_SorteretListe_og_Cirkulært_Array.Exercise4.Exercise4;
+import PRO.Lektion19_SorteretListe_og_Cirkulært_Array.Exercise5.Exercise5;
 import Utility.Styling;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        int printExercise = 5;
+        int printExercise = 1;
 
         switch (printExercise) {
             case 1:
@@ -35,10 +34,7 @@ public class Main {
                 System.out.println(Styling.txtOrange(Styling.underline("\nExercise 5 \n")));
                 Exercise5.print();
                 break;
-            case 6:
-                System.out.println(Styling.txtOrange(Styling.underline("\nExercise 6 \n")));
-                Exercise6.print();
-                break;
+
         }
     }
 

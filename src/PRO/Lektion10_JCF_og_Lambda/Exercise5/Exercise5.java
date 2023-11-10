@@ -1,5 +1,13 @@
 package PRO.Lektion10_JCF_og_Lambda.Exercise5;
-public class Exercise5{
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+
+public class Exercise5 {
 /*
     ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
     │                                                                                                            │
@@ -37,10 +45,90 @@ public class Exercise5{
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
-    public static void print(){
+    static double sum = 0;
+
+    public static void print() {
+
+        String filePath = "/home/elias/IdeaProjects/Programming 2/src/PRO/Lektion10_JCF_og_Lambda/Exercise5/Reviews";
+        HashMap<String, List<Integer>> reviews = readReviewFile(filePath);
+        calculateReviewAverage(reviews);
+        System.out.println("End.");
+    }
+
+    private static void calculateReviewAverage(HashMap<String, List<Integer>> reviews) {
+
+        // Iterate each movie
+        reviews.entrySet().iterator().forEachRemaining(movie -> {
+
+            // Iterate each review for that movie and add up sum
+            sum = 0;
+            movie.getValue().forEach(rating -> sum += rating);
+
+            int ratings = movie.getValue().size();
+            // Calc Average
+            double avg = sum / ratings;
+            System.out.println(
+                    movie.getKey() + " - " + String.format("%.1f", avg) + " (" + movie.getValue()
+                                                                                      .size() + (ratings == 1 ? " " +
+                            "review" : " reviews"));
+        });
 
     }
 
 
+    /**
+     * @precondition file is formatted as Line1: Film Title, Line2: Integer Film rating value, repeating as needed.
+     */
+    private static HashMap<String, List<Integer>> readReviewFile(String filepath) {
+
+        HashMap<String, List<Integer>> reviews = new HashMap<>();
+
+        try {
+            File myFile = new File(filepath);
+            Scanner myScanner = new Scanner(myFile);
+
+            while (myScanner.hasNextLine()) {
+
+                String movieTitle = myScanner.nextLine();
+                Integer rating = Integer.parseInt(myScanner.nextLine());
+
+                if (reviews.containsKey(movieTitle)) {
+                    reviews.get(movieTitle).add(rating);
+                }
+                else {
+                    reviews.put(movieTitle, new ArrayList<>());
+                    reviews.get(movieTitle).add(rating);
+                }
+
+            }
+
+            myScanner.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return reviews;
+    }
+
+    private static List<String> fileLinesToList(String filepath) {
+
+        List<String> data = new ArrayList<>();
+
+        try {
+            File myFile = new File(filepath);
+            Scanner myScanner = new Scanner(myFile);
+
+            while (myScanner.hasNextLine()) {
+                data.add(myScanner.nextLine());
+            }
+            myScanner.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
 
 }
