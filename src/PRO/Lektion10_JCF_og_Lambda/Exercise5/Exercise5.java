@@ -65,10 +65,12 @@ public class Exercise5 {
 
             int ratings = movie.getValue().size();
             double avg = sum / ratings;
-            System.out.println(
-                    movie.getKey() + " - " + String.format("%.1f", avg) + " (" + movie.getValue()
-                                                                                      .size() + (ratings == 1 ? " " +
-                            "review)" : " reviews)"));
+            System.out.println(movie.getKey() +
+                               " - " +
+                               String.format("%.1f", avg) +
+                               " (" +
+                               movie.getValue().size() +
+                               (ratings == 1 ? " " + "review)" : " reviews)"));
         });
 
     }

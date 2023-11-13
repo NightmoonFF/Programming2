@@ -1,17 +1,16 @@
-package PRO.Lektion11_StrategyPattern;
+package PRO.Lektion12_ObserverPattern;
 
-import PRO.Lektion11_StrategyPattern.Exercise1.Exercise1;
-import PRO.Lektion11_StrategyPattern.Exercise2.Exercise2;
-import PRO.Lektion11_StrategyPattern.Exercise3.Exercise3;
-import PRO.Lektion11_StrategyPattern.Exercise4.Exercise4;
-import PRO.Lektion11_StrategyPattern.Exercise5.Exercise5;
+import PRO.Lektion12_ObserverPattern.Exercise1.Exercise1;
+import PRO.Lektion12_ObserverPattern.Exercise2.Exercise2;
+import PRO.Lektion12_ObserverPattern.Exercise3.Exercise3;
+import PRO.Lektion12_ObserverPattern.Exercise4.Exercise4;
 import Utility.Styling;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        int printExercise = 5;
+        int printExercise = 3;
 
         switch (printExercise) {
             case 1:
@@ -30,10 +29,7 @@ public class Main {
                 System.out.println(Styling.txtOrange(Styling.underline("\nExercise 4 \n")));
                 Exercise4.print();
                 break;
-            case 5:
-                System.out.println(Styling.txtOrange(Styling.underline("\nExercise 5 \n")));
-                Exercise5.print();
-                break;
+
         }
     }
 
