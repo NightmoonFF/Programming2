@@ -33,6 +33,41 @@ public class Exercise1 {
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
+/*
+    1) 2)
+    Joes solution to solve flying rubber ducks, is to make the subclasses not inheret the fly() method
+    but instead remove it from the superclass, and create a fly() interface, that the ones who are
+    suposed to fly inherits from. But java Interfaces have no implementation code, which means you
+    would have to track down each duck and change their fly() code.
+
+    Design principle:
+    In other words, if you’ve got some aspect of your code that is
+    changing, say with every new requirement, then you know you’ve
+    got a behavior that needs to be pulled out and separated from all
+    the stuff that doesn’t change.
+    Here’s another way to think about this principle: take the parts
+    that vary and encapsulate them, so that later you can
+    alter or extend the parts that vary without affecting
+    those that don’t
+
+    Now, to separate the “parts that change from those that stay the same”, we are going to create two
+    sets of classes (totally apart from Duck), one for fly and one for quack. Each set of classes will hold
+    all the implementations of their respective behavior. For instance, we might have one class that
+    implements quacking, another that implements squeaking, and another that implements silence.
+
+    From now on, the Duck behaviors will live in a separate class—a class
+    that implements a particular behavior interface.
+
+    We’ll use an interface to represent each behavior – for instance,
+    FlyBehavior and QuackBehavior – and each implementation of a
+    behavior will implement one of those interfaces.
+
+    Behavior can be changed at runtime, by assigning a different FlyBehavior class to a duck
+
+
+
+*/
+
     public static void print() {
 
     }

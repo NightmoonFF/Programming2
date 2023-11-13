@@ -1,5 +1,11 @@
 package PRO.Lektion11_StrategyPattern.Exercise2;
-public class Exercise2{
+
+import PRO.Lektion11_StrategyPattern.Exercise2.Barks.Growl;
+import PRO.Lektion11_StrategyPattern.Exercise2.Barks.PlayfulBark;
+import PRO.Lektion11_StrategyPattern.Exercise2.Diets.NormalDiet;
+import PRO.Lektion11_StrategyPattern.Exercise2.Diets.ProteinDiet;
+
+public class Exercise2 {
 /*
     ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
     │                                                                                                            │
@@ -17,10 +23,17 @@ public class Exercise2{
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
-    public static void print(){
+    public static void print() {
+
+        Dog dog = new Labrador(new PlayfulBark(), new NormalDiet());
+
+        dog.eat();
+        dog.bark();
+        dog.setDiet(new ProteinDiet());
+        dog.setBarkBehavior(new Growl());
+        dog.eat();
+        dog.bark();
 
     }
-
-
 
 }

@@ -1,5 +1,8 @@
 package PRO.Lektion11_StrategyPattern.Exercise4;
-public class Exercise4{
+
+import PRO.Lektion11_StrategyPattern.Exercise4.EvaluatorStudent.EmailEvaluator;
+
+public class Exercise4 {
 /*
     ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
     │                                                                                                            │
@@ -27,10 +30,10 @@ public class Exercise4{
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
-    public static void print(){
+    public static void print() {
 
+        EmailEvaluator eva = new EmailEvaluator();
+        eva.isValid("hansPetersen@google.com");
     }
-
-
 
 }

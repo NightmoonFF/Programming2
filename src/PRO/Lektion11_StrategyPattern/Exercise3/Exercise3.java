@@ -1,5 +1,6 @@
 package PRO.Lektion11_StrategyPattern.Exercise3;
-public class Exercise3{
+
+public class Exercise3 {
 /*
     ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
     │                                                                                                            │
@@ -18,10 +19,45 @@ public class Exercise3{
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
-    public static void print(){
+    //TODO: extra exercise
+    public static void print() {
+
+        Customer customer1 = new Customer(1, "Elias");
+        Customer customer2 = new Customer(2, "Jonas");
+        Customer customer3 = new Customer(3, "Jonas");
+        Customer customer4 = new Customer(4, "Karl");
+        Customer customer5 = new Customer(4, "Majbrit");
+
+        System.out.println("Testing identical name using " + Customer.getComparator().getClass().getSimpleName() + ":");
+        System.out.println(customer1 + " and " + customer2);
+        System.out.println("Result: " + customer1.compareTo(customer2));
+        System.out.println();
+        System.out.println(customer1 + " and " + customer1);
+        System.out.println("Result: " + customer1.compareTo(customer1));
+        System.out.println();
+        System.out.println(customer2 + " and " + customer3);
+        System.out.println("Result: " + customer2.compareTo(customer3));
+        System.out.println();
+        System.out.println(customer4 + " and " + customer5);
+        System.out.println("Result: " + customer4.compareTo(customer5));
+
+        System.out.println();
+
+        Customer.setComparator(new NumberComparator());
+        System.out.println(
+                "Testing identical number(id) using " + Customer.getComparator().getClass().getSimpleName() + ":");
+        System.out.println(customer1 + " and " + customer2);
+        System.out.println("Result: " + customer1.compareTo(customer2));
+        System.out.println();
+        System.out.println(customer1 + " and " + customer1);
+        System.out.println("Result: " + customer1.compareTo(customer1));
+        System.out.println();
+        System.out.println(customer2 + " and " + customer3);
+        System.out.println("Result: " + customer2.compareTo(customer3));
+        System.out.println();
+        System.out.println(customer4 + " and " + customer5);
+        System.out.println("Result: " + customer4.compareTo(customer5));
 
     }
-
-
 
 }
