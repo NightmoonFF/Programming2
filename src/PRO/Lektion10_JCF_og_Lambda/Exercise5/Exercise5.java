@@ -45,13 +45,13 @@ public class Exercise5 {
     └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
+    //TODO: why is this not allowed inside the lambda like the other variables?
     static double sum = 0;
 
     public static void print() {
 
         String filePath = "/home/elias/IdeaProjects/Programming 2/src/PRO/Lektion10_JCF_og_Lambda/Exercise5/Reviews";
         calculateReviewAverage(readReviewFile(filePath));
-        System.out.println("End.");
     }
 
     private static void calculateReviewAverage(HashMap<String, List<Integer>> reviews) {
@@ -97,7 +97,6 @@ public class Exercise5 {
                     reviews.put(movieTitle, new ArrayList<>());
                     reviews.get(movieTitle).add(rating);
                 }
-
             }
 
             myScanner.close();
@@ -107,26 +106,6 @@ public class Exercise5 {
         }
 
         return reviews;
-    }
-
-    private static List<String> fileLinesToList(String filepath) {
-
-        List<String> data = new ArrayList<>();
-
-        try {
-            File myFile = new File(filepath);
-            Scanner myScanner = new Scanner(myFile);
-
-            while (myScanner.hasNextLine()) {
-                data.add(myScanner.nextLine());
-            }
-            myScanner.close();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return data;
     }
 
 }
