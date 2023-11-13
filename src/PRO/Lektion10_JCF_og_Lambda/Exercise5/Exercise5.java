@@ -50,8 +50,7 @@ public class Exercise5 {
     public static void print() {
 
         String filePath = "/home/elias/IdeaProjects/Programming 2/src/PRO/Lektion10_JCF_og_Lambda/Exercise5/Reviews";
-        HashMap<String, List<Integer>> reviews = readReviewFile(filePath);
-        calculateReviewAverage(reviews);
+        calculateReviewAverage(readReviewFile(filePath));
         System.out.println("End.");
     }
 
@@ -65,12 +64,11 @@ public class Exercise5 {
             movie.getValue().forEach(rating -> sum += rating);
 
             int ratings = movie.getValue().size();
-            // Calc Average
             double avg = sum / ratings;
             System.out.println(
                     movie.getKey() + " - " + String.format("%.1f", avg) + " (" + movie.getValue()
                                                                                       .size() + (ratings == 1 ? " " +
-                            "review" : " reviews"));
+                            "review)" : " reviews)"));
         });
 
     }
