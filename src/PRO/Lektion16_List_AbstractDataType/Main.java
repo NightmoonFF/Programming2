@@ -1,8 +1,8 @@
-package PRO.Lektion16_List_ADT;
+package PRO.Lektion16_List_AbstractDataType;
 
-import PRO.Lektion16_List_ADT.Exercise1.Exercise1;
-import PRO.Lektion16_List_ADT.Exercise2.Exercise2;
-import PRO.Lektion16_List_ADT.Exercise3.Exercise3;
+import PRO.Lektion16_List_AbstractDataType.Exercise1.Exercise1;
+import PRO.Lektion16_List_AbstractDataType.Exercise2.Exercise2;
+import PRO.Lektion16_List_AbstractDataType.Exercise3.Exercise3;
 import Utility.Styling;
 public class Main {
 	public static void main(String[] args) {

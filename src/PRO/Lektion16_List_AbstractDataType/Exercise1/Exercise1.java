@@ -1,4 +1,4 @@
-package PRO.Lektion16_List_ADT.Exercise1;
+package PRO.Lektion16_List_AbstractDataType.Exercise1;
 
 public class Exercise1 {
 /*

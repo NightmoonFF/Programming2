@@ -1,4 +1,4 @@
-package PRO.Lektion16_List_ADT.list23ystudent;
+package PRO.Lektion16_List_AbstractDataType.list23ystudent;
 
 import java.util.Iterator;
 
