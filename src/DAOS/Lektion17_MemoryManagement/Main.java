@@ -15,6 +15,8 @@ public class Main {
         pushThread.start();
         popThread.start();
 
+        System.out.println();
+
     }
 
 }
